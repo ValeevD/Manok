@@ -19,3 +19,6 @@ end
 
 function ControlPoint:right(dt)
 end
+
+function ControlPoint:space(dt)
+end
