@@ -33,6 +33,6 @@ end
 function love.draw()
     sceneManager:draw()
 
-    love.graphics.print(sceneManager.sceneToChange == scene2 and "true" or "false", 300, 300)
-    love.graphics.print(qqq, 300, 350)
+    -- love.graphics.print(sceneManager.sceneToChange == scene2 and "true" or "false", 300, 300)
+    -- love.graphics.print(qqq, 300, 350)
 end

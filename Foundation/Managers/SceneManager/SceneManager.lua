@@ -1,13 +1,13 @@
 SceneManager = Class{}
 
-local SceneStateStatus = {"None", "Begin", "Process", "End"}
+local SceneStateStatus = {["None"] = 1, ["Begin"] = 2, ["Process"] = 3, ["End"] = 4}
 
 function SceneManager:init()
     self.currentScene = EmptyScene()
     self.sceneToChange = EmptyScene()
     self.OnSceneEnd = {}
     self.OnSceneBegin = {}
-    self.state = "None"
+    self.state = SceneStateStatus.None
 end
 
 function SceneManager:LoadScene(scene)
@@ -16,7 +16,7 @@ function SceneManager:LoadScene(scene)
 end
 
 function SceneManager:BeginLoadingScene()
-    self.state = "Begin"
+    self.state = SceneStateStatus.Begin
     self.currentScene:Enable()
 
     for k,v in pairs(self.OnSceneEnd) do
@@ -29,7 +29,7 @@ function SceneManager:EndLoadingScene()
     self.currentScene = self.sceneToChange
     self.currentScene:Enable()
 
-    self.state = "End"
+    self.state = SceneStateStatus.End
 
     for k,v in pairs(self.OnSceneBegin) do
         v:OnSceneBeginDo()
@@ -37,13 +37,13 @@ function SceneManager:EndLoadingScene()
 end
 
 function SceneManager:update(dt)
-    if self.state == "Begin" then
+    if self.state == SceneStateStatus.Begin then
         if self:CheckOnSceneEndCompleted() then
             self:EndLoadingScene()
         end
-    elseif self.state == "End" then
+    elseif self.state == SceneStateStatus.End then
         if self:CheckOnSceneBeginCompleted() then
-            self.state = "None"
+            self.state = SceneStateStatus.None
         end
     end
     self.currentScene:update(dt)
