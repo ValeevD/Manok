@@ -2,6 +2,8 @@ IOnSceneEnd = Class{
     OnSceneEndCompleted = true,
 }
 
-function IOnSceneEnd:OnSceneEndDo()
+function IOnSceneEnd:Release(func)
     self.OnSceneEndCompleted = false
+
+    return func
 end
