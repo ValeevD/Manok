@@ -1,24 +1,13 @@
-Scene = Class{__includes = {IOnSceneEnd, IOnSceneBegin}}
+FadingScreen = Class{__includes = {IObserver, IOnSceneEnd, IOnSceneBegin}}
 
-function Scene:init(imagePath)
-    self.image = love.graphics.newImage(imagePath)
-
+function FadingScreen:init()
     self.timer = Timer()
 
     self.alpha    = 1
     self.fadeTime = 0.3
-
-    self.handlers = {}
-    self.observerLists = {}
 end
 
-function Scene:Observe(observerList, func)
-    table.insert(self.observerLists, observerList)
-
-    observerList[self] = func
-end
-
-function Scene:Enable()
+function FadingScreen:OnEnable()
     self:Observe(sceneManager.OnSceneEnd, IOnSceneEnd.Release(self, function ()
         table.insert(self.handlers, self.timer:tween(self.fadeTime * (1 - self.alpha), self, {alpha = 1}, "linear", function()
             self.OnSceneEndCompleted = true
@@ -32,7 +21,7 @@ function Scene:Enable()
     end))
 end
 
-function Scene:Disable()
+function FadingScreen:OnDisable()
     for _,v in ipairs(self.handlers) do
         self.timer:cancel(v)
     end
@@ -42,13 +31,11 @@ function Scene:Disable()
     end
 end
 
-function Scene:update(dt)
+function FadingScreen:update(dt)
     self.timer:update(dt)
 end
 
-function Scene:draw()
-    love.graphics.draw(self.image)
-
+function FadingScreen:draw()
     if self.alpha > 0 then
         love.graphics.setColor(0,0,0,self.alpha)
         love.graphics.rectangle("fill", 0, 0, 1000, 1000)

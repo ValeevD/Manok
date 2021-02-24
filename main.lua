@@ -2,8 +2,11 @@ function love.load()
     require("Foundation/GameInitializer")
     sceneManager = SceneManager()
 
-    scene1 = Scene("Foundation/Testing/rasstrelirt.jpg")
-    scene2 = Scene("Foundation/Testing/cat.png")
+    scene1 = SimpleScene({color = {1,0,0,0.5}})
+    scene2 = SimpleScene({color = {0,1,0,0.5}})
+
+    table.insert(scene1.gameObjects, FadingScreen())
+    table.insert(scene2.gameObjects, FadingScreen())
 
     sceneManager:LoadScene(scene1)
 
@@ -32,5 +35,4 @@ end
 
 function love.draw()
     sceneManager:draw()
-
 end

@@ -3,8 +3,8 @@ SceneManager = Class{}
 local SceneStateStatus = {["None"] = 1, ["Begin"] = 2, ["Process"] = 3, ["End"] = 4}
 
 function SceneManager:init()
-    self.currentScene  = EmptyScene()
-    self.sceneToChange = EmptyScene()
+    self.currentScene  = IScene()
+    self.sceneToChange = IScene()
     self.OnSceneEnd = {}
     self.OnSceneBegin = {}
     self.state = SceneStateStatus.None
@@ -17,7 +17,7 @@ end
 
 function SceneManager:BeginLoadingScene()
     self.state = SceneStateStatus.Begin
-    self.currentScene:Enable()
+    self.currentScene:OnEnable()
 
     for _,v in pairs(self.OnSceneEnd) do
         v()
@@ -25,9 +25,9 @@ function SceneManager:BeginLoadingScene()
 end
 
 function SceneManager:EndLoadingScene()
-    self.currentScene:Disable()
+    self.currentScene:OnDisable()
     self.currentScene = self.sceneToChange
-    self.currentScene:Enable()
+    self.currentScene:OnEnable()
 
     self.state = SceneStateStatus.End
 

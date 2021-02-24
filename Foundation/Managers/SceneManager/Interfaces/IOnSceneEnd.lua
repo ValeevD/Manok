@@ -1,5 +1,6 @@
 IOnSceneEnd = Class{
     OnSceneEndCompleted = true,
+    handlers = {}
 }
 
 function IOnSceneEnd:Release(func)

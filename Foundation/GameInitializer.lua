@@ -7,7 +7,10 @@ Input  = require("lib/input")
 
 --OBJECTS
 require("Foundation/Managers/SceneManager/SceneManager")
+require("Foundation/Managers/Observer/IObserver")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneEnd")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneBegin")
-require("Foundation/Scene")
-require("Foundation/EmptyScene")
+require("Foundation/Scene/IScene")
+require("Foundation/Scene/Scene")
+require("Game/FadingScreen")
+require("Game/Scene/SimpleScene")
