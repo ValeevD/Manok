@@ -5,21 +5,6 @@ function SimpleScene:init(opts)
 
     self.color = self.opts.color or {1,1,1,1}
 end
-function SimpleScene:OnEnable()
-    for _,v in ipairs(self.gameObjects) do
-        if v.OnEnable then
-            v:OnEnable()
-        end
-    end
-end
-
-function SimpleScene:OnDisable()
-    for _,v in ipairs(self.gameObjects) do
-        if v.OnDisable then
-            v:OnDisable()
-        end
-    end
-end
 
 function SimpleScene:draw()
     local prevColor = {love.graphics.getColor()}

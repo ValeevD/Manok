@@ -2,8 +2,13 @@ function love.load()
     require("Foundation/GameInitializer")
     sceneManager = SceneManager()
 
-    scene1 = SimpleScene({color = {1,0,0,0.5}})
-    scene2 = SimpleScene({color = {0,1,0,0.5}})
+    allGUI = {}
+
+    scene1 = PictureScene("resources/fire.png")
+    scene2 = PictureScene("resources/water.png")
+
+    scene1:SetNextScene(scene2)
+    scene2:SetNextScene(scene1)
 
     table.insert(scene1.gameObjects, FadingScreen())
     table.insert(scene2.gameObjects, FadingScreen())
@@ -15,11 +20,11 @@ function love.load()
 
     input = Input()
     input:bind("space", "space")
+
 end
 
 function love.update(dt)
     if input:pressed("space") then
-        qqq = 0
         if ind == 0 then
             sceneManager:LoadScene(scene2)
             ind = 1
@@ -28,11 +33,27 @@ function love.update(dt)
             ind = 0
         end
     end
-
-    qqq = qqq + 1
     sceneManager:update(dt)
 end
 
 function love.draw()
     sceneManager:draw()
+end
+
+function love.mousepressed(...)
+    for _,v in ipairs(allGUI) do
+        v:mousepress(...)
+    end
+end
+
+function love.keypressed(key)
+    for _,v in ipairs(allGUI) do
+        v:keypress(key)
+    end
+end
+
+function love.textinput(key)
+    for _,v in ipairs(allGUI) do
+        v:textinput(key)
+    end
 end
