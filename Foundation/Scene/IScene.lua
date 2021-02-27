@@ -1,8 +1,9 @@
 IScene = Class{
-    gameObjects = {}
+    gameObjects = {},
 }
 
 function IScene:init()
+    self.guiController = guiManager:NewGUI()
 end
 
 function IScene:OnEnable()

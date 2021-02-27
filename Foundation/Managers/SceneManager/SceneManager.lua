@@ -17,7 +17,7 @@ end
 
 function SceneManager:BeginLoadingScene()
     self.state = SceneStateStatus.Begin
-    self.currentScene:OnEnable()
+    --self.currentScene:OnEnable()
 
     for _,v in pairs(self.OnSceneEnd) do
         v()

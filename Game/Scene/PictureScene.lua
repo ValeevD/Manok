@@ -1,14 +1,29 @@
 PictureScene = Class{__includes = {Scene, IObserver, IOnSceneEnd, IOnSceneBegin}}
 
 function PictureScene:init(imagePath, opts)
+    Scene.init(self)
     self.opts = opts or {}
     self.image = love.graphics.newImage(imagePath)
     self.rotation = 0
     self.angleSpeed = 1
-    self.myGUI = GUI:load()
+    self:FillGUI()
+end
 
-    table.insert(allGUI, self.myGUI)
-    self.but = self.myGUI:checkbox("Next scene", {x = 100, y = 100})
+function PictureScene:FillGUI()
+    local guiController = guiManager:NewGUI()
+    guiController:button("Next scene", {x = 80, y = 80, w = 128, h = GUI.style.unit})
+    .click = function(...)
+        sceneManager:LoadScene(self.nextScene)
+    end
+    self.guiController = guiController
+end
+
+function PictureScene:OnEnable()
+    Scene.OnEnable(self)
+end
+
+function PictureScene:OnDisable()
+    Scene.OnDisable(self)
 end
 
 function PictureScene:SetNextScene(nextScene)
@@ -22,7 +37,7 @@ function PictureScene:update(dt)
         self.rotation = 0
     end
 
-    self.myGUI:update(dt)
+    self.guiController:update(dt)
     Scene.update(self, dt)
 end
 
@@ -34,9 +49,8 @@ function PictureScene:draw()
     love.graphics.translate(wt, ht)
     love.graphics.rotate(self.rotation)
     love.graphics.draw(self.image, -self.image:getWidth() / 2, -self.image:getHeight() / 2)
-    love.graphics.translate(-wt, -ht)
     love.graphics.pop()
 
-    self.myGUI:draw()
+    self.guiController:draw()
     Scene.draw(self)
 end

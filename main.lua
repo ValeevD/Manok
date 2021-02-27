@@ -1,8 +1,9 @@
 function love.load()
+    ind = 0
+    qqq = 0
     require("Foundation/GameInitializer")
+    guiManager = GUIManager()
     sceneManager = SceneManager()
-
-    allGUI = {}
 
     scene1 = PictureScene("resources/fire.png")
     scene2 = PictureScene("resources/water.png")
@@ -13,10 +14,8 @@ function love.load()
     table.insert(scene1.gameObjects, FadingScreen())
     table.insert(scene2.gameObjects, FadingScreen())
 
+    --scene1:OnEnable()
     sceneManager:LoadScene(scene1)
-
-    ind = 0
-    qqq = 0
 
     input = Input()
     input:bind("space", "space")
@@ -37,23 +36,20 @@ function love.update(dt)
 end
 
 function love.draw()
+    love.graphics.print(scene1.guiController and "yes" or "no")
+    love.graphics.print(#guiManager.guiList, 0, 10)
+    love.graphics.print(qqq, 0, 20)
     sceneManager:draw()
 end
 
 function love.mousepressed(...)
-    for _,v in ipairs(allGUI) do
-        v:mousepress(...)
-    end
+    guiManager:mousepressed(...)
 end
 
 function love.keypressed(key)
-    for _,v in ipairs(allGUI) do
-        v:keypress(key)
-    end
+    guiManager:keypressed(key)
 end
 
 function love.textinput(key)
-    for _,v in ipairs(allGUI) do
-        v:textinput(key)
-    end
+    guiManager:textinput(key)
 end

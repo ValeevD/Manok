@@ -1,6 +1,11 @@
 Scene = Class{__includes = {IScene, IObserver, IOnSceneEnd, IOnSceneBegin}}
 
+function Scene:init(...)
+    IScene.init(self, ...)
+end
+
 function Scene:OnEnable()
+    guiManager:Push(self.guiController)
     for _,v in ipairs(self.gameObjects) do
         if v.OnEnable then
             v:OnEnable()
@@ -9,6 +14,7 @@ function Scene:OnEnable()
 end
 
 function Scene:OnDisable()
+    guiManager:Pop(self.guiController)
     for _,v in ipairs(self.gameObjects) do
         if v.OnDisable then
             v:OnDisable()

@@ -13,6 +13,7 @@ require("Foundation/Managers/Observer/IObserver")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneEnd")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneBegin")
 require("Foundation/Managers/SceneStateManager/SceneStateManager")
+require("Foundation/Managers/GUIManager/GUIManager")
 require("Foundation/Scene/IScene")
 require("Foundation/Scene/Scene")
 
