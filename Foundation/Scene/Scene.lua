@@ -1,11 +1,12 @@
-Scene = Class{__includes = {IScene, IObserver, IOnSceneEnd, IOnSceneBegin}}
+Scene = Class{
+    gameObjects = {}
+}
 
 function Scene:init(...)
-    IScene.init(self, ...)
+    self.UI = UIManager()
 end
 
 function Scene:OnEnable()
-    guiManager:Push(self.guiController)
     for _,v in ipairs(self.gameObjects) do
         if v.OnEnable then
             v:OnEnable()
@@ -14,7 +15,6 @@ function Scene:OnEnable()
 end
 
 function Scene:OnDisable()
-    guiManager:Pop(self.guiController)
     for _,v in ipairs(self.gameObjects) do
         if v.OnDisable then
             v:OnDisable()
@@ -23,13 +23,29 @@ function Scene:OnDisable()
 end
 
 function Scene:update(dt)
+    self.UI:update(dt)
+
     for _,v in ipairs(self.gameObjects) do
         v:update(dt)
     end
 end
 
 function Scene:draw()
+    self.UI:draw()
+
     for _,v in ipairs(self.gameObjects) do
         v:draw(dt)
     end
+end
+
+function Scene:mousepressed(...)
+    self.UI:mousepressed(...)
+end
+
+function Scene:keypressed(key)
+    self.UI:keypressed(key)
+end
+
+function Scene:textinput(key)
+    self.UI:textinput(key)
 end

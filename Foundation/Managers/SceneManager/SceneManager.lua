@@ -3,8 +3,8 @@ SceneManager = Class{}
 local SceneStateStatus = {["None"] = 1, ["Begin"] = 2, ["Process"] = 3, ["End"] = 4}
 
 function SceneManager:init()
-    self.currentScene  = IScene()
-    self.sceneToChange = IScene()
+    self.currentScene  = Scene()
+    self.sceneToChange = Scene()
     self.OnSceneEnd = {}
     self.OnSceneBegin = {}
     self.state = SceneStateStatus.None
@@ -17,7 +17,6 @@ end
 
 function SceneManager:BeginLoadingScene()
     self.state = SceneStateStatus.Begin
-    --self.currentScene:OnEnable()
 
     for _,v in pairs(self.OnSceneEnd) do
         v()
@@ -36,7 +35,7 @@ function SceneManager:EndLoadingScene()
     end
 end
 
-function SceneManager:update(dt)
+function SceneManager:ProcessStageChanging()
     if self.state == SceneStateStatus.Begin then
         if self:CheckOnSceneEndCompleted() then
             self:EndLoadingScene()
@@ -46,11 +45,6 @@ function SceneManager:update(dt)
             self.state = SceneStateStatus.None
         end
     end
-    self.currentScene:update(dt)
-end
-
-function SceneManager:draw()
-    self.currentScene:draw()
 end
 
 function SceneManager:CheckOnSceneEndCompleted()
@@ -71,4 +65,26 @@ function SceneManager:CheckOnSceneBeginCompleted()
     end
 
     return true
+end
+
+function SceneManager:update(dt)
+    self:ProcessStageChanging()
+
+    self.currentScene:update(dt)
+end
+
+function SceneManager:draw()
+    self.currentScene:draw()
+end
+
+function SceneManager:mousepressed(...)
+    self.currentScene:mousepressed(...)
+end
+
+function SceneManager:keypressed(key)
+    self.currentScene:keypressed(key)
+end
+
+function SceneManager:textinput(key)
+    self.currentScene:textinput(key)
 end

@@ -1,21 +1,27 @@
-PictureScene = Class{__includes = {Scene, IObserver, IOnSceneEnd, IOnSceneBegin}}
+PictureScene = Class{__includes = {Scene}}
 
 function PictureScene:init(imagePath, opts)
     Scene.init(self)
+
     self.opts = opts or {}
     self.image = love.graphics.newImage(imagePath)
     self.rotation = 0
     self.angleSpeed = 1
-    self:FillGUI()
+    self:FillUI()
 end
 
-function PictureScene:FillGUI()
-    local guiController = guiManager:NewGUI()
-    guiController:button("Next scene", {x = 80, y = 80, w = 128, h = GUI.style.unit})
+function PictureScene:FillUI()
+    --uIController:group("Next state", {math.random(0, 300), math.random(0, 300)})
+
+    local newCanvas = self.UI:NewCanvas()
+
+    newCanvas:button("Next scene", {math.random(30, 100), math.random(30, 100), 128, UI.style.unit})
     .click = function(...)
         sceneManager:LoadScene(self.nextScene)
     end
-    self.guiController = guiController
+    qqq = qqq + 1
+
+    self.UI:Push(newCanvas)
 end
 
 function PictureScene:OnEnable()
@@ -37,7 +43,6 @@ function PictureScene:update(dt)
         self.rotation = 0
     end
 
-    self.guiController:update(dt)
     Scene.update(self, dt)
 end
 
@@ -51,6 +56,5 @@ function PictureScene:draw()
     love.graphics.draw(self.image, -self.image:getWidth() / 2, -self.image:getHeight() / 2)
     love.graphics.pop()
 
-    self.guiController:draw()
     Scene.draw(self)
 end

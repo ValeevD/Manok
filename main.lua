@@ -2,7 +2,7 @@ function love.load()
     ind = 0
     qqq = 0
     require("Foundation/GameInitializer")
-    guiManager = GUIManager()
+    -- uIManager = UIManager()
     sceneManager = SceneManager()
 
     scene1 = PictureScene("resources/fire.png")
@@ -36,20 +36,20 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.print(scene1.guiController and "yes" or "no")
-    love.graphics.print(#guiManager.guiList, 0, 10)
-    love.graphics.print(qqq, 0, 20)
+    -- love.graphics.print(scene1.guiController and "yes" or "no")
+    -- love.graphics.print(#uIManager.guiList, 0, 10)
     sceneManager:draw()
+    love.graphics.print(qqq, 0, 20)
 end
 
 function love.mousepressed(...)
-    guiManager:mousepressed(...)
+    sceneManager:mousepressed(...)
 end
 
 function love.keypressed(key)
-    guiManager:keypressed(key)
+    sceneManager:keypressed(key)
 end
 
 function love.textinput(key)
-    guiManager:textinput(key)
+    sceneManager:textinput(key)
 end
