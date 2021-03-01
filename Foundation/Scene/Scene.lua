@@ -1,9 +1,8 @@
-Scene = Class{
-    gameObjects = {}
-}
+Scene = Class{}
 
 function Scene:init(...)
-    self.UI = UIManager()
+    self.gameObjects = {}
+    self._UI = UIManager()
 end
 
 function Scene:OnEnable()
@@ -23,7 +22,7 @@ function Scene:OnDisable()
 end
 
 function Scene:update(dt)
-    self.UI:update(dt)
+    self._UI:update(dt)
 
     for _,v in ipairs(self.gameObjects) do
         v:update(dt)
@@ -31,7 +30,7 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
-    self.UI:draw()
+    self._UI:draw()
 
     for _,v in ipairs(self.gameObjects) do
         v:draw(dt)
@@ -39,13 +38,13 @@ function Scene:draw()
 end
 
 function Scene:mousepressed(...)
-    self.UI:mousepressed(...)
+    self._UI:mousepressed(...)
 end
 
 function Scene:keypressed(key)
-    self.UI:keypressed(key)
+    self._UI:keypressed(key)
 end
 
 function Scene:textinput(key)
-    self.UI:textinput(key)
+    self._UI:textinput(key)
 end

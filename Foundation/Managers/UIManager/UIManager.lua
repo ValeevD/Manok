@@ -1,6 +1,8 @@
-UIManager = Class{
-    canvasList = {}
-}
+UIManager = Class{}
+
+function UIManager:init()
+    self.canvasList = {}
+end
 
 function UIManager:Push(newCanvas)
     table.insert(self.canvasList, newCanvas)
@@ -15,9 +17,6 @@ function UIManager:Pop(canvas)
     end
 end
 
-function UIManager:NewCanvas()
-    return UI:load()
-end
 
 function UIManager:update(dt)
     for _,v in ipairs(self.canvasList) do

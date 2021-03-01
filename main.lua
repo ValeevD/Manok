@@ -19,27 +19,17 @@ function love.load()
 
     input = Input()
     input:bind("space", "space")
-
 end
 
 function love.update(dt)
     if input:pressed("space") then
-        if ind == 0 then
-            sceneManager:LoadScene(scene2)
-            ind = 1
-        else
-            sceneManager:LoadScene(scene1)
-            ind = 0
-        end
+        sceneManager:LoadScene(sceneManager.currentScene.nextScene)
     end
     sceneManager:update(dt)
 end
 
 function love.draw()
-    -- love.graphics.print(scene1.guiController and "yes" or "no")
-    -- love.graphics.print(#uIManager.guiList, 0, 10)
     sceneManager:draw()
-    love.graphics.print(qqq, 0, 20)
 end
 
 function love.mousepressed(...)

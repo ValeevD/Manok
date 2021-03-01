@@ -5,8 +5,8 @@ local SceneStateStatus = {["None"] = 1, ["Begin"] = 2, ["Process"] = 3, ["End"] 
 function SceneManager:init()
     self.currentScene  = Scene()
     self.sceneToChange = Scene()
-    self.OnSceneEnd = {}
-    self.OnSceneBegin = {}
+    self.onSceneEnd = {}
+    self.onSceneBegin = {}
     self.state = SceneStateStatus.None
 end
 
@@ -18,7 +18,7 @@ end
 function SceneManager:BeginLoadingScene()
     self.state = SceneStateStatus.Begin
 
-    for _,v in pairs(self.OnSceneEnd) do
+    for _,v in pairs(self.onSceneEnd) do
         v()
     end
 end
@@ -30,7 +30,7 @@ function SceneManager:EndLoadingScene()
 
     self.state = SceneStateStatus.End
 
-    for _,v in pairs(self.OnSceneBegin) do
+    for _,v in pairs(self.onSceneBegin) do
         v()
     end
 end
@@ -48,7 +48,7 @@ function SceneManager:ProcessStageChanging()
 end
 
 function SceneManager:CheckOnSceneEndCompleted()
-    for k,_ in pairs(self.OnSceneEnd) do
+    for k,_ in pairs(self.onSceneEnd) do
         if not k.OnSceneEndCompleted then
             return false
         end
@@ -58,7 +58,7 @@ function SceneManager:CheckOnSceneEndCompleted()
 end
 
 function SceneManager:CheckOnSceneBeginCompleted()
-    for k,_ in pairs(self.OnSceneBegin) do
+    for k,_ in pairs(self.onSceneBegin) do
         if not k.OnSceneBeginCompleted then
             return false
         end

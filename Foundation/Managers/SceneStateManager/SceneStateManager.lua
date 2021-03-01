@@ -76,11 +76,11 @@ function SceneStateManager:update(dt)
         local state = self.statesCache[i]
 
         if doUpdate then
-            for _,v in pairs(state.OnUpdate) do
+            for _,v in pairs(state.onUpdate) do
                 v()
             end
         else
-            for _,v in pairs(state.OnUpdateDuringPause) do
+            for _,v in pairs(state.onUpdateDuringPause) do
                 v()
             end
         end

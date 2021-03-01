@@ -5,16 +5,20 @@ function FadingScreen:init()
 
     self.alpha    = 1
     self.fadeTime = 0.3
+
+    IObserver.init(self)
+    IOnSceneEnd.init(self)
+    IOnSceneBegin.init(self)
 end
 
 function FadingScreen:OnEnable()
-    self:Observe(sceneManager.OnSceneEnd, IOnSceneEnd.Release(self, function ()
+    self:Observe(sceneManager.onSceneEnd, IOnSceneEnd.Release(self, function ()
         table.insert(self.handlers, self.timer:tween(self.fadeTime * (1 - self.alpha), self, {alpha = 1}, "linear", function()
             self.OnSceneEndCompleted = true
         end))
     end))
 
-    self:Observe(sceneManager.OnSceneBegin, IOnSceneBegin.Release(self, function()
+    self:Observe(sceneManager.onSceneBegin, IOnSceneBegin.Release(self, function()
         table.insert(self.handlers, self.timer:tween(self.fadeTime * self.alpha, self, {alpha = 0}, "linear", function()
             self.OnSceneBeginCompleted = true
         end))

@@ -1,10 +1,10 @@
 --LIBS
-Class  = require("lib/hump/class")
-Timer  = require("lib/hump/timer")
-Signal = require("lib/hump/signal")
-GameState  = require("lib/hump/gamestate")
-Input  = require("lib/input")
-UI    = require("lib/gspot/Gspot")
+Class     = require("lib/hump/class")
+Timer     = require("lib/hump/timer")
+Signal    = require("lib/hump/signal")
+GameState = require("lib/hump/gamestate")
+Input     = require("lib/input")
+Gspot        = require("lib/gspot/Gspot")
 
 
 --OBJECTS
@@ -18,5 +18,4 @@ require("Foundation/Managers/SceneStateManager/SceneStateManager")
 
 
 require("Game/FadingScreen")
-require("Game/Scene/SimpleScene")
 require("Game/Scene/PictureScene")

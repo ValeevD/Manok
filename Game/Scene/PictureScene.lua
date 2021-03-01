@@ -6,30 +6,19 @@ function PictureScene:init(imagePath, opts)
     self.opts = opts or {}
     self.image = love.graphics.newImage(imagePath)
     self.rotation = 0
-    self.angleSpeed = 1
+    self.angleSpeed = 10
     self:FillUI()
 end
 
 function PictureScene:FillUI()
-    --uIController:group("Next state", {math.random(0, 300), math.random(0, 300)})
+    local newCanvas = Gspot:load()
 
-    local newCanvas = self.UI:NewCanvas()
-
-    newCanvas:button("Next scene", {math.random(30, 100), math.random(30, 100), 128, UI.style.unit})
+    newCanvas:button("Next scene", {math.random(30, 600), math.random(30, 600), 128, Gspot.style.unit})
     .click = function(...)
         sceneManager:LoadScene(self.nextScene)
     end
-    qqq = qqq + 1
 
-    self.UI:Push(newCanvas)
-end
-
-function PictureScene:OnEnable()
-    Scene.OnEnable(self)
-end
-
-function PictureScene:OnDisable()
-    Scene.OnDisable(self)
+    self._UI:Push(newCanvas)
 end
 
 function PictureScene:SetNextScene(nextScene)
