@@ -38,6 +38,8 @@ function SceneStateManager:UpdateCachedGameStates()
         return
     end
 
+    qqq = qqq + 1
+
     self.stateListChanged = false
 
     self.statesCache = {}
@@ -52,15 +54,13 @@ function SceneStateManager:UpdateCachedGameStates()
 
     for i = 1, #self.states do
         self.statesCache[i] = self.states[i]
-
         self.statesCache[i]:SetSortingOrder(i)
     end
 
-    if self.currentState ~= self.statesCache[n] then
+    if self.currentState ~= self.statesCache[#self.statesCache] then
         local oldState = self.currentState
-        self.currentState = self.statesCache[n]
+        self.currentState = self.statesCache[#self.statesCache]
         self.currentState:BecomeTopmost()
-
         if oldState then
             oldState:ResignTopmost()
         end
@@ -76,13 +76,16 @@ function SceneStateManager:update(dt)
         local state = self.statesCache[i]
 
         if doUpdate then
+
             for _,v in pairs(state.onUpdate) do
-                v()
+                v(dt)
             end
         else
             for _,v in pairs(state.onUpdateDuringPause) do
-                v()
+                v(dt)
             end
         end
+
+        doUpdate = doUpdate and state.updateParentState
     end
 end

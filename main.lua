@@ -30,6 +30,11 @@ end
 
 function love.draw()
     sceneManager:draw()
+    love.graphics.print(#scene1.UI.canvasList)
+    love.graphics.print(#scene1.stateManager.states, 0, 10)
+    love.graphics.print(qqq, 0, 20)
+    love.graphics.print(scene1.stateManager.currentState == scene1.mainState and "yes" or "no", 0, 30)
+    --love.graphics.print(qqq,0,10)
 end
 
 function love.mousepressed(...)

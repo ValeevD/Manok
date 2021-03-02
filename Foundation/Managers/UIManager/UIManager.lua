@@ -11,12 +11,12 @@ end
 function UIManager:Pop(canvas)
     for i = 1, #self.canvasList do
         if self.canvasList[i] == canvas then
-            table.remove(self.canvasList, i)
+            self.canvasList[i] = self.canvasList[#self.canvasList]
+            table.remove(self.canvasList, #self.canvasList)
             break
         end
     end
 end
-
 
 function UIManager:update(dt)
     for _,v in ipairs(self.canvasList) do
@@ -31,19 +31,23 @@ function UIManager:draw()
 end
 
 function UIManager:mousepressed(...)
-    for _,v in ipairs(self.canvasList) do
-        v:mousepress(...)
+    -- for _,v in ipairs(self.canvasList) do
+    --     v:mousepress(...)
+    -- end
+
+    if #self.canvasList > 0 then
+        self.canvasList[#self.canvasList]:mousepress(...)
     end
 end
 
-function UIManager:keypressed(key)
+function UIManager:keypressed(...)
     for _,v in ipairs(self.canvasList) do
-        v:keypress(key)
+        v:keypress(...)
     end
 end
 
-function UIManager:textinput(key)
+function UIManager:textinput(...)
     for _,v in ipairs(self.canvasList) do
-        v:textinput(key)
+        v:textinput(...)
     end
 end

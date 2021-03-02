@@ -14,6 +14,7 @@ require("Foundation/Managers/SceneManager/Interfaces/IOnSceneEnd")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneBegin")
 require("Foundation/Managers/UIManager/UIManager")
 require("Foundation/Scene/Scene")
+require("Foundation/Managers/SceneStateManager/SceneState/SceneState")
 require("Foundation/Managers/SceneStateManager/SceneStateManager")
 
 
