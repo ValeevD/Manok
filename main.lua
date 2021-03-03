@@ -2,7 +2,7 @@ function love.load()
     ind = 0
     qqq = 0
     require("Foundation/GameInitializer")
-    -- uIManager = UIManager()
+
     sceneManager = SceneManager()
 
     scene1 = PictureScene("resources/fire.png")
@@ -11,10 +11,9 @@ function love.load()
     scene1:SetNextScene(scene2)
     scene2:SetNextScene(scene1)
 
-    table.insert(scene1.gameObjects, FadingScreen())
-    table.insert(scene2.gameObjects, FadingScreen())
+    -- table.insert(scene1.gameObjects, FadingScreen())
+    -- table.insert(scene2.gameObjects, FadingScreen())
 
-    --scene1:OnEnable()
     sceneManager:LoadScene(scene1)
 
     input = Input()
@@ -30,8 +29,9 @@ end
 
 function love.draw()
     sceneManager:draw()
-    love.graphics.print(#scene1.UI.canvasList)
-    love.graphics.print(#scene1.stateManager.states, 0, 10)
+    love.graphics.print(qqq)
+    -- love.graphics.print(#scene1.UI.canvasList)
+    -- love.graphics.print(#scene1.stateManager.states, 0, 10)
 end
 
 function love.mousepressed(...)

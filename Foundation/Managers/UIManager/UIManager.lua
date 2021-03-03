@@ -15,8 +15,7 @@ function UIManager:Pop(canvas)
 
     for i = 1, #self.canvasList do
         if self.canvasList[i] == canvas then
-            self.canvasList[i] = self.canvasList[#self.canvasList]
-            table.remove(self.canvasList, #self.canvasList)
+            table.remove(self.canvasList, i)
             break
         end
     end

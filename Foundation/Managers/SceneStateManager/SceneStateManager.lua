@@ -18,7 +18,7 @@ end
 
 function SceneStateManager:Pop(state)
     if state == nil then
-        state = self.currentState
+        state = self.states[#self.states]
     end
 
     self.stateListChanged = true
@@ -124,11 +124,11 @@ function SceneStateManager:mousepressed(...)
         if doUpdate then
 
             for k,v in pairs(state.onUpdate) do
-                k:mousepress(...)
+                if k.mousepress then k:mousepress(...) end
             end
         else
             for k,v in pairs(state.onUpdateDuringPause) do
-                k:mousepress(...)
+                if k.mousepress then k:mousepress(...) end
             end
         end
 

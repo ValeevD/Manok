@@ -1,6 +1,5 @@
 IOnSceneEnd = Class{}
 
-
 function IOnSceneEnd:init()
     self.OnSceneEndCompleted = true
     self.handlers = {}

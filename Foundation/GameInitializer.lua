@@ -6,7 +6,6 @@ GameState = require("lib/hump/gamestate")
 Input     = require("lib/input")
 Gspot     = require("lib/gspot/Gspot")
 
-
 --OBJECTS
 require("Foundation/Managers/SceneManager/SceneManager")
 require("Foundation/Managers/Observer/IObserver")
@@ -22,3 +21,7 @@ Class.include(Gspot, IObserver)
 
 require("Game/FadingScreen")
 require("Game/Scene/PictureScene")
+
+clickSource = love.audio.newSource("resources/click.wav", "static")
+fadeInSource = love.audio.newSource("resources/fade_in.wav", "static")
+fadeOutSource = love.audio.newSource("resources/fade_out.wav", "static")

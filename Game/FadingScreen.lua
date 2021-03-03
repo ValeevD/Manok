@@ -32,11 +32,10 @@ function FadingScreen:OnDisable()
         self.timer:cancel(v)
     end
 
-    for _,v in ipairs(self.observerLists) do
-        v[self] = nil
-    end
-
+    qqq = qqq + 1
     self.alpha = 1
+
+    IObserver.OnDisable(self)
 end
 
 function FadingScreen:update(dt)
