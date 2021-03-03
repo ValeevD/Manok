@@ -23,7 +23,6 @@ function Scene:OnDisable()
 end
 
 function Scene:update(dt)
-    --self.UI:update(dt)
     self.stateManager:update(dt)
     for _,v in ipairs(self.gameObjects) do
         v:update(dt)
@@ -39,13 +38,13 @@ function Scene:draw()
 end
 
 function Scene:mousepressed(...)
-    self.UI:mousepressed(...)
+    self.stateManager:mousepressed(...)
 end
 
 function Scene:keypressed(key)
-    self.UI:keypressed(key)
+    self.stateManager:keypressed(key)
 end
 
 function Scene:textinput(key)
-    self.UI:textinput(key)
+    self.stateManager:textinput(key)
 end

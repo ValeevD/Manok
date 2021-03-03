@@ -24,7 +24,7 @@ function SceneState:Activate()
     end
 
     self.isVisible = true
-    for _,v in ipairs(self.onActivate) do v() end
+    for _,v in pairs(self.onActivate) do v() end
 end
 
 function SceneState:Deactivate()
@@ -33,7 +33,7 @@ function SceneState:Deactivate()
     end
 
     self.isVisible = false
-    for _,v in ipairs(self.onDeactivate) do v() end
+    for _,v in pairs(self.onDeactivate) do v() end
 end
 
 function SceneState:BecomeTopmost()
@@ -42,7 +42,7 @@ function SceneState:BecomeTopmost()
     end
 
     self.isTopmost = true
-    for _,v in ipairs(self.onBecomeTopmost) do v() end
+    for _,v in pairs(self.onBecomeTopmost) do v() end
 end
 
 function SceneState:ResignTopmost()
@@ -51,11 +51,11 @@ function SceneState:ResignTopmost()
     end
 
     self.isTopmost = false
-    for _,v in ipairs(self.onResignTopmost) do v() end
+    for _,v in pairs(self.onResignTopmost) do v() end
 end
 
 function SceneState:SetSortingOrder(sortingOrder)
     self.sortingOrder = sortingOrder
 
-    for _,v in ipairs(self.onSortingOrderChanged) do v() end
+    for _,v in pairs(self.onSortingOrderChanged) do v() end
 end

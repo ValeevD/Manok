@@ -1,4 +1,4 @@
-PictureScene = Class{__includes = {Scene}}
+PictureScene = Class{__includes = {IObserver, Scene}}
 
 function PictureScene:init(imagePath, opts)
     Scene.init(self)
@@ -7,36 +7,52 @@ function PictureScene:init(imagePath, opts)
     self.image = love.graphics.newImage(imagePath)
     self.rotation = 0
     self.angleSpeed = 1
-    self.mainState = SceneState()
-    self.newState = SceneState()
     self:FillUI()
 end
 
 function PictureScene:FillUI()
-    self.mainState = SceneState()
-    self.stateManager:Push(self.mainState)
+    local mainState = SceneState()
+    local newState = SceneState()
 
-    self.newState = SceneState()
-    --self.newState.updateParentState = true
+    local newCanvas = NewGUI()
+    local newCanvas2 = NewGUI()
 
-    local newCanvas = Gspot:load()
-    local newCanvas2 = Gspot:load()
+    newCanvas:Observe(mainState.onUpdate, newCanvas.update)
+    newCanvas2:Observe(newState.onUpdate, newCanvas2.update)
 
-    table.insert(self.mainState.onUpdate, function(dt) newCanvas:update(dt) end)
-    local newButton = newCanvas:button("Next state", {math.random(30, 600), math.random(30, 600), 128, Gspot.style.unit})
-    newButton.click = function(this)
-        self.stateManager:Push(self.newState)
-        self.UI:Push(newCanvas2)
-    end
+    newCanvas:Observe(mainState.onActivate, function()
+        local newButton = newCanvas:button("Next state", {math.random(30, 600), math.random(30, 600), 128, Gspot.style.unit})
+        newButton.click = function(this)
+            self.stateManager:Push(newState)
+            self.UI:Push(newCanvas2)
+        end
+    end)
 
-    table.insert(self.newState.onUpdate, function(dt) newCanvas2:update(dt) end)
-    local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
-    newButton2.click = function(this)
-        self.stateManager:Pop(self.newState)
-        self.UI:Pop(newCanvas2)
-    end
+    newCanvas2:Observe(newState.onActivate, function()
+        local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
+        newButton2.click = function(this)
+            sceneManager:LoadScene(self.nextScene)
+        end
+    end)
 
+    self.stateManager:Push(mainState)
     self.UI:Push(newCanvas)
+end
+
+function PictureScene:OnDisable()
+    local n = #self.stateManager.states
+    while n > 1 do
+        self.stateManager:Pop()
+        n = n - 1
+    end
+
+    n = #self.UI.canvasList
+    while n > 1 do
+        self.UI:Pop()
+        n = n - 1
+    end
+
+    Scene.OnDisable(self)
 end
 
 function PictureScene:SetNextScene(nextScene)
