@@ -7,6 +7,7 @@ function SceneManager:init()
     self.sceneToChange = Scene()
     self.onSceneEnd = {}
     self.onSceneBegin = {}
+    self.onCurrentSceneUnload = {}
     self.state = SceneStateStatus.None
 end
 
