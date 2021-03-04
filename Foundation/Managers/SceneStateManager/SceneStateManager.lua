@@ -80,11 +80,11 @@ function SceneStateManager:update(dt)
         if doUpdate then
 
             for k,v in pairs(state.onUpdate) do
-                v(k, dt)
+                v(dt)
             end
         else
             for k,v in pairs(state.onUpdateDuringPause) do
-                v(k, dt)
+                v(dt)
             end
         end
 

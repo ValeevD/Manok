@@ -11,9 +11,6 @@ function love.load()
     scene1:SetNextScene(scene2)
     scene2:SetNextScene(scene1)
 
-    -- table.insert(scene1.gameObjects, FadingScreen())
-    -- table.insert(scene2.gameObjects, FadingScreen())
-
     sceneManager:LoadScene(scene1)
 
     input = Input()
@@ -30,8 +27,6 @@ end
 function love.draw()
     sceneManager:draw()
     love.graphics.print(qqq)
-    -- love.graphics.print(#scene1.UI.canvasList)
-    -- love.graphics.print(#scene1.stateManager.states, 0, 10)
 end
 
 function love.mousepressed(...)

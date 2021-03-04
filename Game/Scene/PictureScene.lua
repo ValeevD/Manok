@@ -7,13 +7,14 @@ function PictureScene:init(imagePath, opts)
     IOnSceneEnd.init(self)
 
     self.opts = opts or {}
-    self.timer = Timer()
     self.image = love.graphics.newImage(imagePath)
     self.rotation = 0
     self.angleSpeed = 1
 
     self.mainState = SceneState()
     self.newState = SceneState()
+
+    table.insert(self.gameObjects, FadingScreen())
 end
 
 function PictureScene:FillUI()
@@ -21,7 +22,9 @@ function PictureScene:FillUI()
     local newCanvas2 = NewGUI()
 
     newCanvas
-    :Observe(self.mainState.onUpdate, newCanvas.update)
+    :Observe(self.mainState.onUpdate, function(dt)
+        newCanvas:update(dt)
+    end)
     :Observe(self.mainState.onActivate, function()
         local newButton = newCanvas:button("Next state", {math.random(30, 600), math.random(30, 600), 128, Gspot.style.unit})
         newButton.click = function(this)
@@ -35,7 +38,9 @@ function PictureScene:FillUI()
     end)
 
     newCanvas2
-    :Observe(self.newState.onUpdate, newCanvas2.update)
+    :Observe(self.newState.onUpdate, function(dt)
+        newCanvas2:update(dt)
+    end)
     :Observe(self.newState.onActivate, function()
         local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
         newButton2.click = function(this)
@@ -47,35 +52,12 @@ function PictureScene:FillUI()
 
     local fadingScreen = FadingScreen()
 
-    fadingScreen
-    :Observe(self.mainState.onActivate, function() fadingScreen:OnEnable() end)
-    :Observe(self.mainState.onUpdate, fadingScreen.update)
-    :Observe(self.mainState.onDeactivate, function() fadingScreen:OnDisable() end)
-
     self.stateManager:Push(self.mainState)
     self.UI:Push(newCanvas)
-
-    self.UI:Push(fadingScreen)
 end
 
 function PictureScene:OnEnable()
-
-    self:Observe(sceneManager.onSceneBegin, IOnSceneBegin.Release(self, function ()
-        love.audio.play(fadeInSource)
-        self.OnSceneBeginCompleted = true
-        -- table.insert(self.handlers, self.timer:after(fadeInSource:getDuration(), function()
-        -- end))
-    end))
-
-    self:Observe(sceneManager.onSceneEnd, IOnSceneEnd.Release(self, function ()
-        love.audio.play(fadeOutSource)
-        self.OnSceneEndCompleted = true
-        -- table.insert(self.handlers, self.timer:after(fadeOutSource:getDuration(), function()
-        -- end))
-    end))
-
     self:FillUI()
-
     Scene.OnEnable(self)
 end
 
@@ -108,7 +90,6 @@ function PictureScene:update(dt)
         self.rotation = 0
     end
 
-    self.timer:update(dt)
     Scene.update(self, dt)
 end
 
