@@ -38,7 +38,7 @@ function SoundManager:StopMusic()
 end
 
 function SoundManager:OnEnable()
-    self:Observe(self.sceneManager, function()
+    self:Observe(self.sceneManager.onCurrentSceneUnload, function()
         for _,channel in pairs(self.channels) do
             channel:StopAllSounds(false)
         end

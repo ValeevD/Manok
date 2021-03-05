@@ -1,6 +1,6 @@
 SceneManager = Class{}
 
-local SceneStateStatus = {["None"] = 1, ["Begin"] = 2, ["Process"] = 3, ["End"] = 4}
+local SceneStateStatus = {["None"] = 1, ["Begin"] = 2, ["Unload"] = 3, ["Process"] = 4, ["End"] = 5}
 
 function SceneManager:init()
     self.currentScene  = Scene()
@@ -19,9 +19,7 @@ end
 function SceneManager:BeginLoadingScene()
     self.state = SceneStateStatus.Begin
 
-    for _,v in pairs(self.onSceneEnd) do
-        v()
-    end
+    for _,v in pairs(self.onSceneEnd) do v() end
 end
 
 function SceneManager:EndLoadingScene()
@@ -31,15 +29,23 @@ function SceneManager:EndLoadingScene()
 
     self.state = SceneStateStatus.End
 
-    for _,v in pairs(self.onSceneBegin) do
-        v()
-    end
+    for _,v in pairs(self.onSceneBegin) do v() end
+end
+
+function SceneManager:UnloadScene()
+    self.state = SceneStateStatus.Unload
+
+    for _,v in pairs(self.onCurrentSceneUnload) do v() end
 end
 
 function SceneManager:ProcessStageChanging()
     if self.state == SceneStateStatus.Begin then
         if self:CheckOnSceneEndCompleted() then
             self:EndLoadingScene()
+        end
+    elseif self.state == SceneStateStatus.Unload then
+        if self:CheckOnSceneUnloadCompleted() then
+            self:UnloadScene()
         end
     elseif self.state == SceneStateStatus.End then
         if self:CheckOnSceneBeginCompleted() then
@@ -61,6 +67,16 @@ end
 function SceneManager:CheckOnSceneBeginCompleted()
     for k,_ in pairs(self.onSceneBegin) do
         if not k.OnSceneBeginCompleted then
+            return false
+        end
+    end
+
+    return true
+end
+
+function SceneManager:CheckOnSceneUnloadCompleted()
+    for k,_ in pairs(self.onCurrentSceneUnload) do
+        if not k.OnSceneUnloadCompleted then
             return false
         end
     end
