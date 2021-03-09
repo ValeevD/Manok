@@ -36,4 +36,6 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
     if not gameObject or not gameObject.x or not gameObject.y then
         target = nil
     end
+
+    local source = soundSourceFactory.create(clip)
 end
