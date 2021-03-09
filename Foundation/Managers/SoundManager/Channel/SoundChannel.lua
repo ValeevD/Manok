@@ -37,5 +37,11 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
         target = nil
     end
 
-    local source = soundSourceFactory.create(clip)
+    local soundSource = soundSourceFactory.create(clip)
+    local audioSource = soundSource.source
+
+    audioSource:setVolume(volume)
+    -- audioSource:setVolume(volume)
+
+
 end

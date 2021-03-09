@@ -15,11 +15,13 @@ function love.load()
 
     input = Input()
     input:bind("space", "space")
+
 end
 
 function love.update(dt)
     if input:pressed("space") then
-        sceneManager:LoadScene(sceneManager.currentScene.nextScene)
+        --sceneManager:LoadScene(sceneManager.currentScene.nextScene)
+        local mx, my = love.mouse.getPosition()
     end
     sceneManager:update(dt)
 end
