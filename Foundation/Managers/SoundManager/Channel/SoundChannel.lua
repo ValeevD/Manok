@@ -32,7 +32,8 @@ function SoundChannel:Play(clip, loop, surviveSceneLoad, volume)
 end
 
 function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
+    local target = gameObject
     if not gameObject or not gameObject.x or not gameObject.y then
-        self:Play(clip, loop, surviveSceneLoad, volume)
+        target = nil
     end
 end
