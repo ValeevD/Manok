@@ -22,6 +22,6 @@ Class.include(Gspot, IObserver)
 require("Game/FadingScreen")
 require("Game/Scene/PictureScene")
 
-clickSource = love.audio.newSource("resources/click.wav", "static")
+clickSource = love.audio.newSource("resources/click.mp3", "static")
 fadeInSource = love.audio.newSource("resources/fade_in.wav", "static")
-fadeOutSource = love.audio.newSource("resources/fade_out.wav", "static")
+fadeOutSource = love.audio.newSource("resources/fade_out.mp3", "static")

@@ -21,13 +21,15 @@ function PictureScene:FillUI()
     local newCanvas = NewGUI()
     local newCanvas2 = NewGUI()
 
-    newCanvas
+    newCanvas--Observing
     :Observe(self.mainState.onUpdate, function(dt)
         newCanvas:update(dt)
     end)
     :Observe(self.mainState.onActivate, function()
-        local newButton = newCanvas:button("Next state", {math.random(30, 600), math.random(30, 600), 128, Gspot.style.unit})
+        local newButton = newCanvas:button("Next state", {300, 300, 128, Gspot.style.unit})
         newButton.click = function(this)
+            love.audio.setPosition(290, 290)
+            clickSource:setPosition(300, 300)
             love.audio.play(clickSource)
             self.stateManager:Push(self.newState)
             self.UI:Push(newCanvas2)
@@ -44,6 +46,7 @@ function PictureScene:FillUI()
     :Observe(self.newState.onActivate, function()
         local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
         newButton2.click = function(this)
+            love.audio.setPosition(300, 300)
             love.audio.play(clickSource)
             self.stateManager:Pop(self.newState)
             self.UI:Pop(newCanvas2)
@@ -58,7 +61,7 @@ end
 
 function PictureScene:OnEnable()
     self:FillUI()
-    Scene.OnEnable(self)
+    Scene.OnEnable(self)--base
 end
 
 function PictureScene:OnDisable()
@@ -75,8 +78,8 @@ function PictureScene:OnDisable()
     end
     self.handlers = {}
 
-    IObserver.OnDisable(self)
-    Scene.OnDisable(self)
+    IObserver.OnDisable(self)--base
+    Scene.OnDisable(self)--base
 end
 
 function PictureScene:SetNextScene(nextScene)
@@ -90,7 +93,7 @@ function PictureScene:update(dt)
         self.rotation = 0
     end
 
-    Scene.update(self, dt)
+    Scene.update(self, dt)--base
 end
 
 function PictureScene:draw()
@@ -103,5 +106,5 @@ function PictureScene:draw()
     love.graphics.draw(self.image, -self.image:getWidth() / 2, -self.image:getHeight() / 2)
     love.graphics.pop()
 
-    Scene.draw(self)
+    Scene.draw(self)--base
 end
