@@ -1,10 +1,9 @@
 SoundChannel = Class()
 
-function SoundChannel:init(soundSources, mixerGroup)
+function SoundChannel:init()
     self.channelID = ""
 
     self.soundSources = {}
-    self.mixerGroup = mixerGroup
     self.volumeChanged = false
     self.enabled = false
     self.volume = 1
@@ -42,7 +41,7 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
 
     soundSource.volume = volume
     soundSource.loop = loop
-    soundSource.mixerGroup = mixerGroup
+    soundSource.soundChannel = self
     soundSource.ignoreListenerPause = surviveSceneLoad
     soundSource.surviveOnSceneLoad = surviveSceneLoad
     table.insert(self.soundSources, soundSource)

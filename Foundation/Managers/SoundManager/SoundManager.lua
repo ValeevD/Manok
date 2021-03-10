@@ -11,6 +11,10 @@ function SoundManager:init(sceneManager)
     self.musicChannel = nil
 end
 
+function SoundManager:AddChannel(channelName)
+    self.channels[channelName] = SoundChannel()
+end
+
 function SoundManager:GetChannel(channelName)
     return self.channels[channelName]
 end
