@@ -46,7 +46,7 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
     soundSource.surviveOnSceneLoad = surviveSceneLoad
     table.insert(self.soundSources, soundSource)
 
-    if(clip and (self.enabled or loop)) then
+    if clip and (self.enabled or loop) then
         soundSource.clip = clip
         soundSource:play()
     end
@@ -59,5 +59,15 @@ function SoundChannel:Stop(handle)
         return
     end
 
-    local n
+    for ind, vlaue in self.soundSources do
+        if vlaue == handle.source then
+            table.remove(self.soundSources, ind)
+            handle.source:Dispose()
+            return
+        end
+    end
+end
+
+function SoundChannel:StopAllSounds(includingSurviveSceneLoad)
+
 end
