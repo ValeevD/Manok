@@ -1,12 +1,15 @@
 SoundChannel = Class()
 
-function SoundChannel:init()
-    self.channelID = ""
+function SoundChannel:init(channelName, mixer)
+    self.channelName = channelName
+
+    self.mixer = mixer
+
+    self.enabled = false--load from settings
+    self.volume = 1     --load from settings
+    self.volumeChanged = true
 
     self.soundSources = {}
-    self.volumeChanged = false
-    self.enabled = false
-    self.volume = 1
 end
 
 function SoundChannel:SetEnabled(value)
@@ -44,6 +47,8 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
     soundSource.soundChannel = self
     soundSource.ignoreListenerPause = surviveSceneLoad
     soundSource.surviveOnSceneLoad = surviveSceneLoad
+    soundSource.target = target
+
     table.insert(self.soundSources, soundSource)
 
     if clip and (self.enabled or loop) then
@@ -69,5 +74,36 @@ function SoundChannel:Stop(handle)
 end
 
 function SoundChannel:StopAllSounds(includingSurviveSceneLoad)
+    for i = #self.soundSources, 1, -1 do
+        local source = self.soundSources[i]
 
+        if includingSurviveSceneLoad or not source.surviveOnSceneLoad then
+            table.remove(self.soundSources, i)
+            source:Dispose()
+        end
+    end
+end
+
+function SoundChannel:update(dt, listener)
+    for i = #self.soundSources, 1, -1 do
+        local source = self.soundSources[i]
+
+        if not source then
+            table.remove(self.soundSources, i)
+        elseif not source.isPlaying then
+            table.remove(self.soundSources, i)
+            source:Dispose()
+        elseif not self.enabledand not source.loop then
+            table.remove(self.soundSources, i)
+            source:Dispose()
+        else
+            local sourceGameObject = source.target
+
+            if not sourceGameObject then
+                sourceGameObject = listener
+            end
+
+            source.target = sourceGameObject
+        end
+    end
 end

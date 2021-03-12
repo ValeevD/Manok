@@ -6,6 +6,8 @@ function SoundManager:init(sceneManager)
     self.musicFadeTime = 1
     self.channels = {}
 
+    self.listener = nil
+
     self.currentMusic = SoundHandle()
     self.sfxChannel = nil
     self.musicChannel = nil
