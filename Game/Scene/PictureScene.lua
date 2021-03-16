@@ -28,8 +28,7 @@ function PictureScene:FillUI()
     :Observe(self.mainState.onActivate, function()
         local newButton = newCanvas:button("Next state", {300, 300, 128, Gspot.style.unit})
         newButton.click = function(this)
-            clickSource = love.audio.newSource("resources/click.mp3", "stream")
-            soundManager.sfxChannel:Play(clickSource)
+            soundManager.sfxChannel:Play(clickSource:clone())
             self.stateManager:Push(self.newState)
             self.UI:Push(newCanvas2)
         end
@@ -45,8 +44,7 @@ function PictureScene:FillUI()
     :Observe(self.newState.onActivate, function()
         local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
         newButton2.click = function(this)
-            clickSource = love.audio.newSource("resources/click.mp3", "stream")
-            soundManager.musicChannel:Play(clickSource, false, false, 0.3)
+            soundManager.sfxChannel:Play(clickSource:clone())
             self.stateManager:Pop(self.newState)
             self.UI:Pop(newCanvas2)
         end
@@ -59,7 +57,7 @@ function PictureScene:FillUI()
 end
 
 function PictureScene:OnEnable()
-    soundManager:PlayMusic(self.opts:clone(), 1)
+    soundManager:PlayMusic(self.opts:clone(), 0.05)
     self:FillUI()
     Scene.OnEnable(self)--base
 end

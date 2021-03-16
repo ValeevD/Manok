@@ -28,7 +28,7 @@ function SoundManager:GetChannel(channelName)
 end
 
 function SoundManager:PlayMusic(clip, volume)
-    volume = volume or 1
+    --volume = volume or 1
     if self.currentMusic and self.currentMusic:IsPlaying() then
         qqq = qqq + 1
         if self.currentMusic.clip == clip then
