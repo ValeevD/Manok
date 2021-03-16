@@ -1,8 +1,9 @@
-IOnSceneEnd = Class{}
+IOnSceneEnd = Class{__includes = {ITweener}}
 
 function IOnSceneEnd:init()
     self.OnSceneEndCompleted = true
-    self.handlers = {}
+
+    ITweener.init(self)
 end
 
 function IOnSceneEnd:Release(func)

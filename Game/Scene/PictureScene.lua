@@ -28,9 +28,8 @@ function PictureScene:FillUI()
     :Observe(self.mainState.onActivate, function()
         local newButton = newCanvas:button("Next state", {300, 300, 128, Gspot.style.unit})
         newButton.click = function(this)
-            love.audio.setPosition(290, 290)
-            clickSource:setPosition(300, 300)
-            love.audio.play(clickSource)
+            clickSource = love.audio.newSource("resources/click.mp3", "stream")
+            soundManager.sfxChannel:Play(clickSource)
             self.stateManager:Push(self.newState)
             self.UI:Push(newCanvas2)
         end
@@ -46,8 +45,7 @@ function PictureScene:FillUI()
     :Observe(self.newState.onActivate, function()
         local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
         newButton2.click = function(this)
-            love.audio.setPosition(300, 300)
-            love.audio.play(clickSource)
+            soundManager.sfxChannel:PlayAt(this, clickSource)
             self.stateManager:Pop(self.newState)
             self.UI:Pop(newCanvas2)
         end
@@ -73,13 +71,9 @@ function PictureScene:OnDisable()
         self.UI:Pop()
     end
 
-    for _,v in ipairs(self.handlers) do
-        self.timer:cancel(v)
-    end
-    self.handlers = {}
-
     IObserver.OnDisable(self)--base
     Scene.OnDisable(self)--base
+    IOnSceneBegin.Kill(self)
 end
 
 function PictureScene:SetNextScene(nextScene)

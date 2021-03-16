@@ -6,9 +6,21 @@ GameState = require("lib/hump/gamestate")
 Input     = require("lib/input")
 Gspot     = require("lib/gspot/Gspot")
 
+HandleID = 0
+
 --OBJECTS
 require("Foundation/Managers/SceneManager/SceneManager")
+
+--SOUND MANAGER
+require("Foundation/Managers/SoundManager/Source/SoundSource")
+require("Foundation/Managers/SoundManager/Source/SoundHandle")
+
+require("Foundation/Managers/SoundManager/Channel/SoundChannel")
+
+require("Foundation/Managers/SoundManager/SoundManager")
+
 require("Foundation/Managers/Observer/IObserver")
+require("Foundation/Managers/SceneManager/Interfaces/ITweener")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneEnd")
 require("Foundation/Managers/SceneManager/Interfaces/IOnSceneBegin")
 require("Foundation/Managers/UIManager/UIManager")

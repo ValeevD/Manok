@@ -1,9 +1,7 @@
 SoundChannel = Class()
 
-function SoundChannel:init(channelName, mixer)
+function SoundChannel:init(channelName)
     self.channelName = channelName
-
-    self.mixer = mixer
 
     self.enabled = false--load from settings
     self.volume = 1     --load from settings
@@ -40,20 +38,23 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
         target = nil
     end
 
-    local soundSource = soundSourceFactory.create(clip)
+    -- local soundSource = soundSourceFactory.create(clip)
 
-    soundSource.volume = volume
-    soundSource.loop = loop
+    qqq = qqq + 1
+    local soundSource = SoundSource()
+
+    soundSource.volume = volume or 1
+    soundSource.loop = loop or false
     soundSource.soundChannel = self
-    soundSource.ignoreListenerPause = surviveSceneLoad
-    soundSource.surviveOnSceneLoad = surviveSceneLoad
-    soundSource.target = target
+    soundSource.ignoreListenerPause = surviveSceneLoad or false
+    soundSource.surviveOnSceneLoad = surviveSceneLoad or false
+    soundSource.target = target or nil
 
     table.insert(self.soundSources, soundSource)
 
     if clip and (self.enabled or loop) then
         soundSource.clip = clip
-        soundSource:play()
+        soundSource:Play()
     end
 
     return SoundHandle(self, soundSource)
@@ -67,7 +68,7 @@ function SoundChannel:Stop(handle)
     for ind, vlaue in self.soundSources do
         if vlaue == handle.source then
             table.remove(self.soundSources, ind)
-            handle.source:Dispose()
+            handle.soundSource:Dispose()
             return
         end
     end
@@ -90,10 +91,10 @@ function SoundChannel:update(dt, listener)
 
         if not source then
             table.remove(self.soundSources, i)
-        elseif not source.isPlaying then
+        elseif not source.clip:isPlaying() then
             table.remove(self.soundSources, i)
             source:Dispose()
-        elseif not self.enabledand not source.loop then
+        elseif not self.enabled and not source.clip:isLooping() then
             table.remove(self.soundSources, i)
             source:Dispose()
         else

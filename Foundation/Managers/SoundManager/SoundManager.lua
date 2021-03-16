@@ -8,13 +8,19 @@ function SoundManager:init(sceneManager)
 
     self.listener = nil
 
-    self.currentMusic = SoundHandle()
-    self.sfxChannel = nil
-    self.musicChannel = nil
+    self.sfxChannel = self:AddChannel("sfx")
+    self.sfxChannel:SetEnabled(true)
+
+    self.musicChannel = self:AddChannel("music")
+    self.musicChannel:SetEnabled(true)
+
+    self.currentMusic = nil
 end
 
 function SoundManager:AddChannel(channelName)
-    self.channels[channelName] = SoundChannel()
+    local newChannel = SoundChannel(channelName)
+    self.channels[channelName] = newChannel
+    return newChannel
 end
 
 function SoundManager:GetChannel(channelName)
@@ -22,8 +28,8 @@ function SoundManager:GetChannel(channelName)
 end
 
 function SoundManager:PlayMusic(clip, volume)
-    if self.currentMusic.isPlaying then
-        if self.currentMusic.audioClip == clip then
+    if self.currentMusic:IsPlaying() then
+        if self.currentMusic.clip == clip then
             self.currentMusic.volume = volume
             return
         end
@@ -53,6 +59,6 @@ end
 
 function SoundManager:update(dt)
     for _,channel in pairs(self.channels) do
-        channel:Update(dt)
+        channel:update(dt)
     end
 end
