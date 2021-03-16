@@ -35,5 +35,7 @@ require("Game/FadingScreen")
 require("Game/Scene/PictureScene")
 
 clickSource = love.audio.newSource("resources/click.mp3", "static")
+backGroundSource1 = love.audio.newSource("resources/Background_1.mp3", "stream")
+backGroundSource2 = love.audio.newSource("resources/Background_2.mp3", "stream")
 fadeInSource = love.audio.newSource("resources/fade_in.wav", "static")
 fadeOutSource = love.audio.newSource("resources/fade_out.mp3", "static")

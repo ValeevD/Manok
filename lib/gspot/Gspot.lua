@@ -1005,7 +1005,6 @@ Gspot.input = {
 			this.Gspot:unfocus()
 		else
 			-- all of the above reset the blink timer, but otherwise it's retained
-			qqq = qqq + 1
 			this.cursorlife = save_cursorlife
 		end
 		-- /fragments

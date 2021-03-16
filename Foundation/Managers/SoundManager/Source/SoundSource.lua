@@ -32,10 +32,15 @@ end
 
 function SoundSource:Fade(endValue, time)
     self.volume = clip and clip:getVolume() or 0
-    self.timer:tween(time, self, {volume = endValue}, "linear")
+    self.volumeChanged = true
+    self.timer:tween(time, self, {volume = endValue}, "linear", function() self.volumeChanged = false end)
 end
 
 function SoundSource:update(dt)
+    if self.volumeChanged and self.clip then
+        self.clip:setVolume(self.volume)
+    end
+
     self.timer:update(dt)
 end
 
@@ -62,9 +67,6 @@ function SoundSource:Play()
     if self.target then
         self.clip:setPosition(self.target.x, self.target.y)
         self.clip:setRelative(false)
-    else
-        self.clip:setPosition(0, 0)
-        self.clip:setRelative(true)
     end
 
     self.clip:play()

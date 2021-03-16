@@ -11,7 +11,7 @@ function SoundHandle:IsValid()
 end
 
 function SoundHandle:IsPlaying()
-    return self:IsValid() and self.soundSource.source:isPlaying()
+    return self:IsValid() and self.soundSource.clip:isPlaying()
 end
 
 function SoundHandle:IsLooping()
@@ -35,10 +35,16 @@ function SoundHandle:Stop()
 end
 
 function SoundHandle:Fade(endValue, time)
-    soundSource:Fade(endValue, time)
+    self.soundSource:Fade(endValue, time)
 end
 
 function SoundHandle:FadeToStop(time)
     self.soundSource:Kill()
     self:Fade(0, time)
+end
+
+function SoundHandle:update(dt)
+    if self.soundSource then
+        self.soundSource:update(dt)
+    end
 end

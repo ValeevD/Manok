@@ -5,7 +5,6 @@ function SoundChannel:init(channelName)
 
     self.enabled = false--load from settings
     self.volume = 1     --load from settings
-    self.volumeChanged = true
 
     self.soundSources = {}
 end
@@ -16,7 +15,6 @@ function SoundChannel:SetEnabled(value)
     end
 
     self.enabled = value
-    self.volumeChanged = true
 end
 
 function SoundChannel:SetVolume(value)
@@ -25,7 +23,6 @@ function SoundChannel:SetVolume(value)
     end
 
     self.volume = value
-    self.volumeChanged = true
 end
 
 function SoundChannel:Play(clip, loop, surviveSceneLoad, volume)
@@ -38,9 +35,6 @@ function SoundChannel:PlayAt(gameObject, clip, loop, surviveSceneLoad, volume)
         target = nil
     end
 
-    -- local soundSource = soundSourceFactory.create(clip)
-
-    qqq = qqq + 1
     local soundSource = SoundSource()
 
     soundSource.volume = volume or 1
@@ -105,6 +99,8 @@ function SoundChannel:update(dt, listener)
             end
 
             source.target = sourceGameObject
+
+            self.soundSources[i]:update(dt)
         end
     end
 end

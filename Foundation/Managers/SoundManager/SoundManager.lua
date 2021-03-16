@@ -28,9 +28,11 @@ function SoundManager:GetChannel(channelName)
 end
 
 function SoundManager:PlayMusic(clip, volume)
-    if self.currentMusic:IsPlaying() then
+    volume = volume or 1
+    if self.currentMusic and self.currentMusic:IsPlaying() then
+        qqq = qqq + 1
         if self.currentMusic.clip == clip then
-            self.currentMusic.volume = volume
+            self.currentMusic:SetVolume(volume)
             return
         end
 
@@ -38,7 +40,7 @@ function SoundManager:PlayMusic(clip, volume)
     end
 
     self.currentMusic = self.musicChannel:Play(clip, true, true, 0)
-    self.currentMusic:Fade(1, self.musicFadeTime)
+    self.currentMusic:Fade(volume, self.musicFadeTime)
 end
 
 function SoundManager:StopMusic()

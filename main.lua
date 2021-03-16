@@ -6,8 +6,8 @@ function love.load()
     sceneManager = SceneManager()
     soundManager = SoundManager(sceneManager)
 
-    scene1 = PictureScene("resources/fire.png")
-    scene2 = PictureScene("resources/water.png")
+    scene1 = PictureScene("resources/fire.png", backGroundSource1)
+    scene2 = PictureScene("resources/water.png", backGroundSource2)
 
     scene1:SetNextScene(scene2)
     scene2:SetNextScene(scene1)
@@ -17,7 +17,11 @@ function love.load()
     input = Input()
     input:bind("space", "space")
 
-    love.audio.setPosition(300, 300)
+    --love.audio.setPosition(300, 300)
+
+
+
+    --backGroundSource1:play()
 end
 
 function love.update(dt)
@@ -31,7 +35,8 @@ end
 
 function love.draw()
     sceneManager:draw()
-    love.graphics.print(#soundManager.sfxChannel.soundSources)
+    love.graphics.print(qqq)
+    -- love.graphics.print(#soundManager.musicChannel.soundSources)
 end
 
 function love.mousepressed(...)
