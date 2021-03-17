@@ -6,7 +6,7 @@ GameState = require("lib/hump/gamestate")
 Input     = require("lib/input")
 Gspot     = require("lib/gspot/Gspot")
 
-HandleID = 0
+HandleID  = 0
 
 --OBJECTS
 require("Foundation/Managers/SceneManager/SceneManager")

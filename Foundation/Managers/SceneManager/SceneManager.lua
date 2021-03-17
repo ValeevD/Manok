@@ -14,6 +14,8 @@ end
 function SceneManager:LoadScene(scene)
     self.sceneToChange = scene
     self:BeginLoadingScene()
+
+    soundManager.musicChannel:StopAllSounds()
 end
 
 function SceneManager:BeginLoadingScene()

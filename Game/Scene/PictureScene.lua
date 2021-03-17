@@ -57,7 +57,9 @@ function PictureScene:FillUI()
 end
 
 function PictureScene:OnEnable()
-    soundManager:PlayMusic(self.opts:clone(), 0.05)
+    --soundManager:PlayMusic(self.opts:clone(), 0.05)
+
+    soundManager.musicChannel:Play(self.opts:clone(), true, true, 1)
     self:FillUI()
     Scene.OnEnable(self)--base
 end

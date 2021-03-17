@@ -1,7 +1,7 @@
 SoundManager = Class{__includes = {IObserver}}
 
-function SoundManager:init(sceneManager)
-    self.sceneManager = sceneManager
+function SoundManager:init()
+    --self.sceneManager = sceneManager
 
     self.musicFadeTime = 1
     self.channels = {}
@@ -52,7 +52,7 @@ function SoundManager:StopMusic()
 end
 
 function SoundManager:OnEnable()
-    self:Observe(self.sceneManager.onCurrentSceneUnload, function()
+    self:Observe(sceneManager.onCurrentSceneUnload, function()
         for _,channel in pairs(self.channels) do
             channel:StopAllSounds(false)
         end

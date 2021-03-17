@@ -73,9 +73,10 @@ function SoundChannel:StopAllSounds(includingSurviveSceneLoad)
         local source = self.soundSources[i]
 
         if includingSurviveSceneLoad or not source.surviveOnSceneLoad then
-            table.remove(self.soundSources, i)
             source:Dispose()
         end
+
+        table.remove(self.soundSources, i)
     end
 end
 
