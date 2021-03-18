@@ -192,7 +192,7 @@ Gspot.load = function(this)
 		mousein = nil,
 		focus = nil,
 		drag = nil,
-		orepeat = nil,
+		orepeat = nil
 	}
 	def.mousedt = def.dblclickinterval -- Double click timer (make it expired)
 	return setmetatable(def, {__index = this, __call = this.load})

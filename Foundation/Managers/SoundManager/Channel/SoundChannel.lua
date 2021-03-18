@@ -23,6 +23,10 @@ function SoundChannel:SetVolume(value)
     end
 
     self.volume = value
+
+    for _,v in ipairs(self.soundSources) do
+        v:RefreshVolume()
+    end
 end
 
 function SoundChannel:Play(clip, loop, surviveSceneLoad, volume)

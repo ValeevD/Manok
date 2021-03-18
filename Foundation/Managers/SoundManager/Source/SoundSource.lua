@@ -56,6 +56,18 @@ function SoundSource:SoundChannel(channel)
     self.soundChannel = channel
 end
 
+function SoundSource:SetVolume(newVol)
+    self.volume = newVol
+
+    self:RefreshVolume()
+end
+
+function SoundSource:RefreshVolume()
+    if self.clip then
+        self.clip:setVolume(self.volume * self.soundChannel.volume)
+    end
+end
+
 function SoundSource:Play()
     if not self.clip then
         return

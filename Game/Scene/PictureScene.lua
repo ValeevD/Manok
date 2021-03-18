@@ -32,6 +32,21 @@ function PictureScene:FillUI()
             self.stateManager:Push(self.newState)
             self.UI:Push(newCanvas2)
         end
+
+        local scrll = newCanvas:scroll(nil, {50, 50, h = 100}, nil, {0, 100, (1 - soundManager.musicChannel.volume) * 100, 1, 'vertical'})
+        scrll:setshape('circle')
+        scrll.update = function(this, dt)
+            this.Gspot[this.elementtype].update(this, dt)
+            soundManager.musicChannel:SetVolume((100 - this.values.current) / 100)
+        end
+
+        local scrll2 = newCanvas:scroll(nil, {150, 50, h = 100}, nil, {0, 100, (1 - soundManager.sfxChannel.volume) * 100, 1, 'vertical'})
+        scrll2:setshape('circle')
+        scrll2.update = function(this, dt)
+            this.Gspot[this.elementtype].update(this, dt)
+            soundManager.sfxChannel:SetVolume((100 - this.values.current) / 100)
+        end
+
     end)
     :Observe(self.mainState.onDeactivate, function()
         newCanvas:OnDisable()
@@ -57,9 +72,9 @@ function PictureScene:FillUI()
 end
 
 function PictureScene:OnEnable()
-    --soundManager:PlayMusic(self.opts:clone(), 0.05)
+    soundManager:PlayMusic(self.opts:clone(), 0.1)
 
-    soundManager.musicChannel:Play(self.opts:clone(), true, true, 1)
+    --soundManager.musicChannel:PlayAt({x = 300, y = 300}, self.opts:clone(), true, true, 1)
     self:FillUI()
     Scene.OnEnable(self)--base
 end

@@ -27,7 +27,7 @@ function SoundHandle:GetVolume()
 end
 
 function SoundHandle:SetVolume(value)
-    self.soundSource.clip:setVolume(value)
+    self.soundSource:SetVolume(value)
 end
 
 function SoundHandle:Stop()

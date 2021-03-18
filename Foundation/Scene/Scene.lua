@@ -41,6 +41,10 @@ function Scene:mousepressed(...)
     self.stateManager:mousepressed(...)
 end
 
+function Scene:mousereleased(...)
+    self.stateManager:mousereleased(...)
+end
+
 function Scene:keypressed(key)
     self.stateManager:keypressed(key)
 end

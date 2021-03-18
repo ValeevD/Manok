@@ -136,6 +136,28 @@ function SceneStateManager:mousepressed(...)
     end
 end
 
+function SceneStateManager:mousereleased(...)
+    self:UpdateCachedGameStates()
+
+    local doUpdate = true
+    for i = #self.statesCache, 1, -1 do
+        local state = self.statesCache[i]
+
+        if doUpdate then
+
+            for k,v in pairs(state.onUpdate) do
+                if k.mouserelease then k:mouserelease(...) end
+            end
+        else
+            for k,v in pairs(state.onUpdateDuringPause) do
+                if k.mouserelease then k:mouserelease(...) end
+            end
+        end
+
+        doUpdate = doUpdate and state.updateParentState
+    end
+end
+
 function SceneStateManager:keypressed(...)
     self:UpdateCachedGameStates()
 

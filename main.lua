@@ -34,7 +34,7 @@ end
 
 function love.draw()
     sceneManager:draw()
-    love.graphics.print(qqq)
+    love.graphics.print(""..qqq)
     -- love.graphics.print(#soundManager.musicChannel.soundSources)
 end
 
@@ -48,4 +48,8 @@ end
 
 function love.textinput(key)
     sceneManager:textinput(key)
+end
+
+function love.mousereleased(...)
+	sceneManager:mousereleased(...)
 end

@@ -100,6 +100,10 @@ function SceneManager:mousepressed(...)
     self.currentScene:mousepressed(...)
 end
 
+function SceneManager:mousereleased(...)
+    self.currentScene:mousereleased(...)
+end
+
 function SceneManager:keypressed(key)
     self.currentScene:keypressed(key)
 end
