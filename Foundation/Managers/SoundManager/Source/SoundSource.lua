@@ -38,7 +38,7 @@ end
 
 function SoundSource:update(dt)
     if self.volumeChanged and self.clip then
-        self.clip:setVolume(self.volume)
+        self.clip:setVolume(self.volume * self.soundChannel.volume)
     end
 
     self.timer:update(dt)
@@ -82,4 +82,5 @@ function SoundSource:Play()
     end
 
     self.clip:play()
+    qqq = self.clip:getVolume()
 end
