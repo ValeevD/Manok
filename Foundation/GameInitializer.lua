@@ -8,6 +8,10 @@ Gspot     = require("lib/gspot/Gspot")
 
 HandleID  = 0
 
+
+cartographer = require("lib/cartographer")
+require("Foundation/Observer/IObserver")
+
 --OBJECTS
 require("Foundation/Managers/SceneManager/SceneManager")
 
@@ -19,10 +23,9 @@ require("Foundation/Managers/SoundManager/Channel/SoundChannel")
 
 require("Foundation/Managers/SoundManager/SoundManager")
 
-require("Foundation/Managers/Observer/IObserver")
-require("Foundation/Managers/SceneManager/Interfaces/ITweener")
-require("Foundation/Managers/SceneManager/Interfaces/IOnSceneEnd")
-require("Foundation/Managers/SceneManager/Interfaces/IOnSceneBegin")
+require("Foundation/Managers/Interfaces/ITweener")
+require("Foundation/Managers/Interfaces/IOnSceneEnd")
+require("Foundation/Managers/Interfaces/IOnSceneBegin")
 require("Foundation/Managers/UIManager/UIManager")
 require("Foundation/Managers/UIManager/GUI")
 require("Foundation/Scene/Scene")

@@ -1,8 +1,6 @@
 SoundManager = Class{__includes = {IObserver}}
 
 function SoundManager:init()
-    --self.sceneManager = sceneManager
-
     self.musicFadeTime = 1
     self.channels = {}
 
@@ -10,11 +8,9 @@ function SoundManager:init()
 
     self.sfxChannel = self:AddChannel("sfx")
     self.sfxChannel:SetEnabled(true)
-    self.sfxChannel:SetVolume(0)
 
     self.musicChannel = self:AddChannel("music")
     self.musicChannel:SetEnabled(true)
-    self.musicChannel:SetVolume(0)
 
     self.currentMusic = nil
 end
