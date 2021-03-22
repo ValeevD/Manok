@@ -1,10 +1,12 @@
 --LIBS
 Class     = require("lib/hump/class")
+Vector     = require("lib/hump/vector")
 Timer     = require("lib/hump/timer")
 Signal    = require("lib/hump/signal")
 GameState = require("lib/hump/gamestate")
 Input     = require("lib/input")
 Gspot     = require("lib/gspot/Gspot")
+Anim8     = require("lib/anim8")
 
 HandleID  = 0
 
@@ -36,6 +38,8 @@ Class.include(Gspot, IObserver)
 
 require("Game/FadingScreen")
 require("Game/Scene/PictureScene")
+
+require("Game/Player/Player")
 
 clickSource = love.audio.newSource("resources/click.mp3", "static")
 backGroundSource1 = love.audio.newSource("resources/Background_1.mp3", "stream")

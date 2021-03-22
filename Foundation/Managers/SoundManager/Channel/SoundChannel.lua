@@ -7,6 +7,7 @@ function SoundChannel:init(channelName)
     self.volume = 1     --load from settings
 
     self.soundSources = {}
+    self.fadingSources = {}
 end
 
 function SoundChannel:SetEnabled(value)
@@ -107,5 +108,9 @@ function SoundChannel:update(dt, listener)
 
             self.soundSources[i]:update(dt)
         end
+    end
+
+    for i = 1, #self.fadingSources do
+        self.fadingSources[i]:update(dt)
     end
 end

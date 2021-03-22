@@ -14,6 +14,10 @@ function PictureScene:init(imagePath, opts)
     self.mainState = SceneState()
     self.newState = SceneState()
 
+
+    self.player = Player(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, {imagePath = "resources/Small.png"})
+
+    table.insert(self.gameObjects, self.player)
     table.insert(self.gameObjects, FadingScreen())
 end
 
@@ -98,11 +102,11 @@ function PictureScene:SetNextScene(nextScene)
 end
 
 function PictureScene:update(dt)
-    self.rotation = self.rotation + self.angleSpeed * dt
+    -- self.rotation = self.rotation + self.angleSpeed * dt
 
-    if self.rotation >= 2*math.pi then
-        self.rotation = 0
-    end
+    -- if self.rotation >= 2*math.pi then
+    --     self.rotation = 0
+    -- end
 
     Scene.update(self, dt)--base
 end
@@ -111,11 +115,17 @@ function PictureScene:draw()
     local w, h = love.window.getMode()
     local wt, ht = w / 2, h / 2
 
-    love.graphics.push()
-    love.graphics.translate(wt, ht)
-    love.graphics.rotate(self.rotation)
-    love.graphics.draw(self.image, -self.image:getWidth() / 2, -self.image:getHeight() / 2)
-    love.graphics.pop()
+
+    -- love.graphics.push()
+    -- love.graphics.translate(wt, ht)
+    -- love.graphics.rotate(self.rotation)
+    -- love.graphics.draw(self.image, -self.image:getWidth() / 2, -self.image:getHeight() / 2)
+    -- love.graphics.pop()
+
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.rectangle("fill", 0, 0, 1000, 1000)
+    love.graphics.setColor(1,1,1,1)
+
 
     Scene.draw(self)--base
 end

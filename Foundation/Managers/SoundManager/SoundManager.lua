@@ -28,7 +28,6 @@ end
 function SoundManager:PlayMusic(clip, volume)
     --volume = volume or 1
     if self.currentMusic and self.currentMusic:IsPlaying() then
-        qqq = qqq + 1
         if self.currentMusic.clip == clip then
             self.currentMusic:SetVolume(volume)
             return
@@ -37,7 +36,7 @@ function SoundManager:PlayMusic(clip, volume)
         self.currentMusic:FadeToStop(self.musicFadeTime)
     end
 
-    self.currentMusic = self.musicChannel:Play(clip, true, true, 0)
+    self.currentMusic = self.musicChannel:Play(clip, true, false, 0)
     self.currentMusic:Fade(volume, self.musicFadeTime)
 end
 

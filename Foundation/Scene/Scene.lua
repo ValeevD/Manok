@@ -30,11 +30,11 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
-    self.UI:draw()
 
     for _,v in ipairs(self.gameObjects) do
         v:draw(dt)
     end
+    self.UI:draw()
 end
 
 function Scene:mousepressed(...)

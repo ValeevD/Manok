@@ -82,5 +82,4 @@ function SoundSource:Play()
     end
 
     self.clip:play()
-    qqq = self.clip:getVolume()
 end

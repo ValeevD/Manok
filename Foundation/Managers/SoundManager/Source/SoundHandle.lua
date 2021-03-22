@@ -4,6 +4,7 @@ function SoundHandle:init(soundChannel, soundSource)
     self.soundChannel = soundChannel or nil
     self.soundSource = soundSource or nil
     self.handleID = soundSource.handleID
+    self.timer = Timer()
 end
 
 function SoundHandle:IsValid()
@@ -39,6 +40,7 @@ function SoundHandle:Fade(endValue, time)
 end
 
 function SoundHandle:FadeToStop(time)
+    self.timer:after(time, function() self:Dispose() end)
     self.soundSource:Kill()
     self:Fade(0, time)
 end
@@ -47,4 +49,9 @@ function SoundHandle:update(dt)
     if self.soundSource then
         self.soundSource:update(dt)
     end
+end
+
+function SoundHandle:Dispose()
+    self.soundSource:Dispose()
+    self.timer = nil
 end
