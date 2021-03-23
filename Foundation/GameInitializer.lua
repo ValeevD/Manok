@@ -10,7 +10,6 @@ Anim8     = require("lib/anim8")
 
 HandleID  = 0
 
-
 cartographer = require("lib/cartographer")
 require("Foundation/Observer/IObserver")
 
@@ -24,6 +23,9 @@ require("Foundation/Managers/SoundManager/Source/SoundHandle")
 require("Foundation/Managers/SoundManager/Channel/SoundChannel")
 
 require("Foundation/Managers/SoundManager/SoundManager")
+
+--INPUT MANAGER
+require("Foundation/Managers/InputManager/InputManager")
 
 require("Foundation/Managers/Interfaces/ITweener")
 require("Foundation/Managers/Interfaces/IOnSceneEnd")
