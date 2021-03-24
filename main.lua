@@ -2,10 +2,12 @@ function love.load()
     ind = 0
     qqq = 0
     require("Foundation/GameInitializer")
+    gdir = Vector(0,0)
 
     sceneManager = SceneManager()
     soundManager = SoundManager()
 
+    inputManager = InputManager()
     scene1 = PictureScene("resources/fire.png", backGroundSource1)
     scene2 = PictureScene("resources/water.png", backGroundSource2)
 
@@ -20,9 +22,6 @@ function love.load()
     input:bind("s", "down")
     input:bind("a", "left")
     input:bind("d", "right")
-
-
-
 end
 
 function love.update(dt)
@@ -38,7 +37,8 @@ function love.draw()
     sceneManager:draw()
 
     love.graphics.setColor(0,0,0)
-    love.graphics.print(qqq)
+    love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
+    -- love.graphics.print(qqq)
     love.graphics.setColor(1,1,1)
 end
 

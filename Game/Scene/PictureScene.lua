@@ -14,8 +14,7 @@ function PictureScene:init(imagePath, opts)
     self.mainState = SceneState()
     self.newState = SceneState()
 
-
-    self.player = Player(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, {imagePath = "resources/Small.png"})
+    self.player = Player(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, {imagePath = "resources/Small.png", sceneState = self.mainState})
 
     table.insert(self.gameObjects, self.player)
     table.insert(self.gameObjects, FadingScreen())

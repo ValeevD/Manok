@@ -2,7 +2,6 @@ InputSource = Class()
 
 function InputSource:init(playerInput)
     self.playerInput = playerInput
-    self.actions = {}
 end
 
 function InputSource:Dispose()
@@ -10,19 +9,15 @@ function InputSource:Dispose()
 end
 
 function InputSource:DisconnectAllActions()
-    for k,v in pairs(self.actions) do
-        v:Dispose()
+    if self.playerInput == nil then
+        return
     end
 
-    self.actions = {}
+    for k,v in pairs(self.playerInput.actions) do
+        v:Dispose()
+    end
 end
 
 function InputSource:Action(name)
-    local wrapper = self.actions[name]
-
-    if wrapper then
-        return wrapper
-    end
-
-
+    return self.playerInput:FindAction(name)
 end

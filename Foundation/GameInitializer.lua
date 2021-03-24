@@ -25,7 +25,16 @@ require("Foundation/Managers/SoundManager/Channel/SoundChannel")
 require("Foundation/Managers/SoundManager/SoundManager")
 
 --INPUT MANAGER
+require("Foundation/Managers/InputManager/Action/DummyInputAction")
+require("Foundation/Managers/InputManager/Action/InputAction")
+
+require("Foundation/Managers/InputManager/InputSource/InputSource")
+require("Foundation/Managers/InputManager/InputSource/DummyInputSource")
+
+require("Foundation/Managers/InputManager/PlayerInput")
+
 require("Foundation/Managers/InputManager/InputManager")
+
 
 require("Foundation/Managers/Interfaces/ITweener")
 require("Foundation/Managers/Interfaces/IOnSceneEnd")
@@ -41,6 +50,7 @@ Class.include(Gspot, IObserver)
 require("Game/FadingScreen")
 require("Game/Scene/PictureScene")
 
+require("Game/Player/PlayerMovementInput")
 require("Game/Player/Player")
 
 clickSource = love.audio.newSource("resources/click.mp3", "static")

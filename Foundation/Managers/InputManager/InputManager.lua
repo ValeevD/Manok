@@ -5,6 +5,10 @@ function InputManager:init()
     self.inputSourcesOverrides = {}
 end
 
+function InputManager:Register(player)
+    self.inputSources[player.playerIndex] = InputSource(player.playerInput)
+end
+
 function InputManager:InputForPlayer(playerIndex)
     local inputSource = self.inputSourcesOverrides[playerIndex]
     if inputSource then
