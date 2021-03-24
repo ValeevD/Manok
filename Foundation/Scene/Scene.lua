@@ -24,8 +24,12 @@ end
 
 function Scene:update(dt)
     self.stateManager:update(dt)
-    for _,v in ipairs(self.gameObjects) do
-        v:update(dt)
+    for i = #self.gameObjects, 1, -1 do
+        if not self.gameObjects[i] or self.gameObjects[i].isDead then
+            table.remove(self.gameObjects, i)
+        else
+            self.gameObjects[i]:update(dt)
+        end
     end
 end
 

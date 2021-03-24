@@ -16,6 +16,7 @@ function Player:init(x, y, opts)
     inputManager:Register(self)
 
     self.playerMoveInput = PlayerMovementInput(self, opts.sceneState)
+    self.playerShootInput = PlayerShootInput(self, opts.sceneState)
 
     local imgWidth, imgHeight = self.spriteSheet:getWidth(), self.spriteSheet:getHeight()
     local grid = Anim8.newGrid(64, 64, imgWidth, imgHeight)

@@ -17,7 +17,7 @@ function love.load()
     sceneManager:LoadScene(scene1)
 
     input = Input()
-    input:bind("space", "space")
+    input:bind("mouse1", "space")
     input:bind("w", "up")
     input:bind("s", "down")
     input:bind("a", "left")
@@ -25,9 +25,9 @@ function love.load()
 end
 
 function love.update(dt)
-    if input:pressed("space") then
-        sceneManager:LoadScene(sceneManager.currentScene.nextScene)
-    end
+    -- if input:pressed("space") then
+    --     sceneManager:LoadScene(sceneManager.currentScene.nextScene)
+    -- end
     soundManager:update(dt)
     sceneManager:update(dt)
 

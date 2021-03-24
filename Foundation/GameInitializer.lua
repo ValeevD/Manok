@@ -47,11 +47,14 @@ require("Foundation/Managers/SceneStateManager/SceneStateManager")
 
 Class.include(Gspot, IObserver)
 
+require("Game/Bullet")
 require("Game/FadingScreen")
 require("Game/Scene/PictureScene")
 
 require("Game/Player/PlayerMovementInput")
+require("Game/Player/PlayerShootInput")
 require("Game/Player/Player")
+
 
 clickSource = love.audio.newSource("resources/click.mp3", "static")
 backGroundSource1 = love.audio.newSource("resources/Background_1.mp3", "stream")

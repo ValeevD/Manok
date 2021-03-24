@@ -14,6 +14,14 @@ function PlayerInput:init()
             return self.vector
         end
     )
+
+    self.actions["Shoot"] = InputAction(
+        nil,
+        function()
+            return input:pressed("space")
+        end,
+        nil
+    )
 end
 
 function PlayerInput:FindAction(name)
