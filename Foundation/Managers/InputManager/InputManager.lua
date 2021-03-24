@@ -3,6 +3,7 @@ InputManager = Class()
 function InputManager:init()
     self.inputSources = {}
     self.inputSourcesOverrides = {}
+    self.blockByUI = false
 end
 
 function InputManager:Register(player)

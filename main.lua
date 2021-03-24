@@ -17,7 +17,7 @@ function love.load()
     sceneManager:LoadScene(scene1)
 
     input = Input()
-    input:bind("mouse1", "space")
+    input:bind("mouse1", "mouse1")
     input:bind("w", "up")
     input:bind("s", "down")
     input:bind("a", "left")
@@ -37,8 +37,8 @@ function love.draw()
     sceneManager:draw()
 
     love.graphics.setColor(0,0,0)
-    love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
-    -- love.graphics.print(qqq)
+    --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
+    love.graphics.print(qqq)
     love.graphics.setColor(1,1,1)
 end
 

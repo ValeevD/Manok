@@ -18,11 +18,15 @@ function PictureScene:init(imagePath, opts)
 
     table.insert(self.gameObjects, self.player)
     table.insert(self.gameObjects, FadingScreen())
+
+    currentCanvas = nil
 end
 
 function PictureScene:FillUI()
     local newCanvas = NewGUI()
     local newCanvas2 = NewGUI()
+
+    currentCanvas = newCanvas
 
     newCanvas--Observing
     :Observe(self.mainState.onUpdate, function(dt)
@@ -34,6 +38,7 @@ function PictureScene:FillUI()
             soundManager.sfxChannel:Play(clickSource:clone())
             self.stateManager:Push(self.newState)
             self.UI:Push(newCanvas2)
+            currentCanvas = newCanvas2
         end
 
         local scrll = newCanvas:scroll(nil, {50, 50, h = 100}, nil, {0, 100, (1 - soundManager.musicChannel.volume) * 100, 1, 'vertical'})
@@ -65,6 +70,7 @@ function PictureScene:FillUI()
             soundManager.sfxChannel:Play(clickSource:clone())
             self.stateManager:Pop(self.newState)
             self.UI:Pop(newCanvas2)
+            currentCanvas = newCanvas
         end
     end)
 
@@ -108,6 +114,7 @@ function PictureScene:update(dt)
     -- end
 
     Scene.update(self, dt)--base
+    qqq = currentCanvas.blockMouseClick and "yes" or "no"
 end
 
 function PictureScene:draw()

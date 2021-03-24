@@ -2,6 +2,7 @@ InputSource = Class()
 
 function InputSource:init(playerInput)
     self.playerInput = playerInput
+    self.blockByUI = false
 end
 
 function InputSource:Dispose()

@@ -190,6 +190,7 @@ Gspot.load = function(this)
 		mem = {},
 		elements = {},
 		mousein = nil,
+		blockMouseClick = false,
 		focus = nil,
 		drag = nil,
 		orepeat = nil
@@ -199,6 +200,8 @@ Gspot.load = function(this)
 end
 
 Gspot.update = function(this, dt)
+	this.blockMouseClick = false
+
 	this.mousedt = this.mousedt + dt
 	local mouse = {}
 	mouse.x, mouse.y = this:getmouse()
@@ -208,6 +211,7 @@ Gspot.update = function(this, dt)
 	if this.drag then
 		local element = this.drag
 		if love.mouse.isDown(mouseL) then
+			this.blockMouseClick = true
 			if type(element.drag) == 'function' then element:drag(mouse.x, mouse.y)
 			else
 				element.pos.y = mouse.y - element.offset.y
@@ -223,6 +227,7 @@ Gspot.update = function(this, dt)
 		for i, bucket in ipairs(this.elements) do
 			if bucket ~= element and bucket:containspoint(mouse) then this.mouseover = bucket end
 		end
+
 	end
 	for i = #this.elements, 1, -1 do
 		local element = this.elements[i]
@@ -252,6 +257,10 @@ Gspot.update = function(this, dt)
 		if this.mousein and this.mousein.enter then this.mousein:enter() end
 		if mousein and mousein.leave then mousein:leave() end
 	end
+
+
+	this.blockMouseClick = this.blockMouseClick or (this.mousein and true or false)
+	inputManager.blockByUI = this.blockMouseClick
 end
 
 Gspot.draw = function(this)
@@ -300,7 +309,9 @@ Gspot.mousepress = function(this, x, y, button)
 			if mousedt < this.dblclickinterval and element.dblclick then
 				element:dblclick(x, y, button)
 			else
-				if element.click then element:click(x, y) end
+				if element.click then
+					element:click(x, y)
+				end
 				this.mousedt = 0
 			end
 		elseif button == mouseR and element.rclick then element:rclick(x, y)

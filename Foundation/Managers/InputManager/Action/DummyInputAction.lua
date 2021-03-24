@@ -1,17 +1,17 @@
-InputAction = {}
+DummyInputAction = {}
 
-function InputAction:init(activeFunc, triggeredFunc, vector2ValueFunc)
+function DummyInputAction:init(activeFunc, triggeredFunc, vector2ValueFunc)
 
 end
 
-function InputAction:Active()
+function DummyInputAction:Active()
     return false
 end
 
-function InputAction:Triggered()
+function DummyInputAction:Triggered()
     return false
 end
 
-function InputAction:Vector2Value()
+function DummyInputAction:Vector2Value()
     return Vector(0, 0)
 end
