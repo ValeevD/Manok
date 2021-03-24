@@ -1,12 +1,14 @@
 --LIBS
-Class     = require("lib/hump/class")
-Vector     = require("lib/hump/vector")
-Timer     = require("lib/hump/timer")
-Signal    = require("lib/hump/signal")
+Class = require("lib/hump/class")
+Vector = require("lib/hump/vector")
+Timer = require("lib/hump/timer")
+Signal = require("lib/hump/signal")
 GameState = require("lib/hump/gamestate")
-Input     = require("lib/input")
-Gspot     = require("lib/gspot/Gspot")
-Anim8     = require("lib/anim8")
+Input = require("lib/input")
+Gspot = require("lib/gspot/Gspot")
+Anim8 = require("lib/anim8")
+
+Camera = require("lib/hump/camera")
 
 HandleID  = 0
 

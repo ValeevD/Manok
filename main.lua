@@ -22,24 +22,24 @@ function love.load()
     input:bind("s", "down")
     input:bind("a", "left")
     input:bind("d", "right")
+
+    camera = Camera(0, 0)
 end
 
 function love.update(dt)
-    -- if input:pressed("space") then
-    --     sceneManager:LoadScene(sceneManager.currentScene.nextScene)
-    -- end
     soundManager:update(dt)
     sceneManager:update(dt)
-
 end
 
 function love.draw()
+
     sceneManager:draw()
 
     love.graphics.setColor(0,0,0)
     --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
     love.graphics.print(qqq)
     love.graphics.setColor(1,1,1)
+
 end
 
 function love.mousepressed(...)

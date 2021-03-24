@@ -4,7 +4,12 @@ function Bullet:init(x, y, direction)
     ITweener.init(self)
 
     self.x, self.y = x, y
-    self.direction = (Vector(love.mouse.getPosition()) - Vector(self.x, self.y)):normalized()
+    local pos_x, pos_y = love.mouse.getPosition()
+    local wid, hei = love.graphics.getWidth(), love.graphics.getHeight()
+
+    pos_x = camera.x + (pos_x - wid / 2)
+    pos_y = camera.y + (pos_y - hei / 2)
+    self.direction = (Vector(pos_x, pos_y) - Vector(self.x, self.y)):normalized()
 
     self.direction.y = -self.direction.y
     --self.direction = direction:clone()

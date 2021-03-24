@@ -34,10 +34,12 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
-
+    camera:attach()
     for _,v in ipairs(self.gameObjects) do
         v:draw(dt)
     end
+    camera:detach()
+
     self.UI:draw()
 end
 

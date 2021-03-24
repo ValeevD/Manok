@@ -47,6 +47,8 @@ function Player:update(dt)
     else
         self.animation:gotoFrame(3)
     end
+
+    camera:lookAt(self.x, self.y)
 end
 
 function Player:draw()

@@ -130,8 +130,6 @@ function PictureScene:draw()
 
     love.graphics.setColor(1,1,1,1)
     love.graphics.rectangle("fill", 0, 0, 1000, 1000)
-    love.graphics.setColor(1,1,1,1)
-
 
     Scene.draw(self)--base
 end
