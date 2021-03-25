@@ -1,6 +1,7 @@
 SceneState = Class{}
 
 function SceneState:init()
+    self.blockByUI = false
     self.isTopmost = false
     self.isVisible = false
     self.updateParentState = false

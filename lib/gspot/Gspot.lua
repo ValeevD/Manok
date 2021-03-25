@@ -190,7 +190,7 @@ Gspot.load = function(this)
 		mem = {},
 		elements = {},
 		mousein = nil,
-		blockMouseClick = false,
+		-- blockMouseClick = false,
 		focus = nil,
 		drag = nil,
 		orepeat = nil
@@ -200,7 +200,7 @@ Gspot.load = function(this)
 end
 
 Gspot.update = function(this, dt)
-	this.blockMouseClick = false
+	-- this.blockMouseClick = false
 
 	this.mousedt = this.mousedt + dt
 	local mouse = {}
@@ -211,7 +211,7 @@ Gspot.update = function(this, dt)
 	if this.drag then
 		local element = this.drag
 		if love.mouse.isDown(mouseL) then
-			this.blockMouseClick = true
+			-- this.blockMouseClick = true
 			if type(element.drag) == 'function' then element:drag(mouse.x, mouse.y)
 			else
 				element.pos.y = mouse.y - element.offset.y
@@ -259,8 +259,8 @@ Gspot.update = function(this, dt)
 	end
 
 
-	this.blockMouseClick = this.blockMouseClick or (this.mousein and true or false)
-	inputManager.blockByUI = this.blockMouseClick
+	-- -- this.blockMouseClick = this.blockMouseClick or (this.mousein and true or false)
+	-- inputManager.blockByUI = this.blockMouseClick
 end
 
 Gspot.draw = function(this)

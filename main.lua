@@ -24,11 +24,14 @@ function love.load()
     input:bind("d", "right")
 
     camera = Camera(0, 0)
+
+    newMap = cartographer.load("resources/Spritesheet/tilemap.lua")
 end
 
 function love.update(dt)
     soundManager:update(dt)
     sceneManager:update(dt)
+    newMap:update(dt)
 end
 
 function love.draw()
@@ -38,7 +41,20 @@ function love.draw()
     love.graphics.setColor(0,0,0)
     --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
     love.graphics.print(qqq)
+
+    -- local curSceneStateManager = sceneManager.currentScene.stateManager
+    -- local _offset = 0
+    -- for i = #curSceneStateManager.states, 1, -1 do
+    --     love.graphics.print(curSceneStateManager.states[i].name, 0, _offset)
+    --     _offset = _offset + 10
+    -- end
+
+    -- local currentScene = curSceneStateManager.currentState
+
+    -- love.graphics.print("Current state: " ..(currentScene and currentScene.name or "NIL"), 0, _offset)
+
     love.graphics.setColor(1,1,1)
+
 
 end
 

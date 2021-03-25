@@ -35,9 +35,12 @@ end
 
 function Scene:draw()
     camera:attach()
+
+    newMap:draw()
     for _,v in ipairs(self.gameObjects) do
         v:draw(dt)
     end
+
     camera:detach()
 
     self.UI:draw()

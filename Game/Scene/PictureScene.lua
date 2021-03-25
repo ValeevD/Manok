@@ -23,8 +23,8 @@ function PictureScene:init(imagePath, opts)
 end
 
 function PictureScene:FillUI()
-    local newCanvas = NewGUI()
-    local newCanvas2 = NewGUI()
+    local newCanvas = NewGUI(self.mainState)
+    local newCanvas2 = NewGUI(self.newState)
 
     currentCanvas = newCanvas
 

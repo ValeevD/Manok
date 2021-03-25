@@ -18,7 +18,7 @@ function PlayerInput:init()
     self.actions["Shoot"] = InputAction(
         nil,
         function()
-            return input:pressed("mouse1") and not inputManager.blockByUI
+            return input:pressed("mouse1") and not sceneManager.currentScene.stateManager.currentState.blockByUI
         end,
         nil
     )
