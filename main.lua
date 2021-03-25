@@ -40,7 +40,8 @@ function love.draw()
 
     love.graphics.setColor(0,0,0)
     --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
-    love.graphics.print(qqq)
+    -- love.graphics.print(qqq)
+    love.graphics.print(#sceneManager.currentScene.gameObjects)
 
     -- local curSceneStateManager = sceneManager.currentScene.stateManager
     -- local _offset = 0

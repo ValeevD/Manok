@@ -22,6 +22,15 @@ function PlayerInput:init()
         end,
         nil
     )
+
+    self.actions["Look"] = InputAction(
+        nil,
+        nil,
+        function()
+            self.vector.x, self.vector.y = love.mouse.getPosition()
+            return self.vector
+        end
+    )
 end
 
 function PlayerInput:FindAction(name)
