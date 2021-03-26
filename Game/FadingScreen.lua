@@ -42,6 +42,6 @@ end
 
 function FadingScreen:draw()
     love.graphics.setColor(0,0,0,self.alpha)
-    love.graphics.rectangle("fill", 0, 0, 1000, 1000)
+    love.graphics.rectangle("fill", camera.x - love.graphics.getWidth()/2, camera.y - love.graphics.getHeight()/2, 1000, 1000)
     love.graphics.setColor(1,1,1,1)
 end
