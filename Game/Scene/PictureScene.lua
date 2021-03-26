@@ -33,7 +33,7 @@ function PictureScene:FillUI()
         newCanvas:update(dt)
     end)
     :Observe(self.mainState.onActivate, function()
-        local newButton = newCanvas:button("Next state", {300, 300, 128, Gspot.style.unit})
+        local newButton = newCanvas:button("Next state", {love.graphics.getWidth() - 128 - 10, 10, 128, Gspot.style.unit})
         newButton.click = function(this)
             soundManager.sfxChannel:Play(clickSource:clone())
             self.stateManager:Push(self.newState)
@@ -41,14 +41,14 @@ function PictureScene:FillUI()
             currentCanvas = newCanvas2
         end
 
-        local scrll = newCanvas:scroll(nil, {50, 50, h = 100}, nil, {0, 100, (1 - soundManager.musicChannel.volume) * 100, 1, 'vertical'})
+        local scrll = newCanvas:scroll(nil, {10, 10, h = 100}, nil, {0, 100, (1 - soundManager.musicChannel.volume) * 100, 1, 'vertical'})
         scrll:setshape('circle')
         scrll.update = function(this, dt)
             this.Gspot[this.elementtype].update(this, dt)
             soundManager.musicChannel:SetVolume((100 - this.values.current) / 100)
         end
 
-        local scrll2 = newCanvas:scroll(nil, {150, 50, h = 100}, nil, {0, 100, (1 - soundManager.sfxChannel.volume) * 100, 1, 'vertical'})
+        local scrll2 = newCanvas:scroll(nil, {50, 10, h = 100}, nil, {0, 100, (1 - soundManager.sfxChannel.volume) * 100, 1, 'vertical'})
         scrll2:setshape('circle')
         scrll2.update = function(this, dt)
             this.Gspot[this.elementtype].update(this, dt)
@@ -65,12 +65,13 @@ function PictureScene:FillUI()
         newCanvas2:update(dt)
     end)
     :Observe(self.newState.onActivate, function()
-        local newButton2 = newCanvas2:button("Close state", {55, 55, 128, Gspot.style.unit})
+        local newButton2 = newCanvas2:button("Close state", {love.graphics.getWidth() - 128 - 10, 30, 128, Gspot.style.unit})
         newButton2.click = function(this)
             soundManager.sfxChannel:Play(clickSource:clone())
             self.stateManager:Pop(self.newState)
             self.UI:Pop(newCanvas2)
             currentCanvas = newCanvas
+            sceneManager:LoadScene(self.nextScene)
         end
     end)
 
