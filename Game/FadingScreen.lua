@@ -41,7 +41,9 @@ function FadingScreen:update(dt)
 end
 
 function FadingScreen:draw()
+    local curCamera = cameraManager.currentCamera
+
     love.graphics.setColor(0,0,0,self.alpha)
-    love.graphics.rectangle("fill", camera.x - love.graphics.getWidth()/2, camera.y - love.graphics.getHeight()/2, 1000, 1000)
+    love.graphics.rectangle("fill", curCamera.x - love.graphics.getWidth()/2, curCamera.y - love.graphics.getHeight()/2, 1000, 1000)
     love.graphics.setColor(1,1,1,1)
 end

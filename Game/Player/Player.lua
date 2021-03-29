@@ -19,6 +19,7 @@ function Player:init(x, y, opts)
     self.playerMoveInput = PlayerMovementInput(self, opts.sceneState)
     self.playerShootInput = PlayerShootInput(self, opts.sceneState)
     self.playerLookInput = PlayerLookInput(self, opts.sceneState)
+    self.playerLookCameraInput = PlayerLookCameraInput(self, opts.sceneState)
 
     local imgWidth, imgHeight = self.spriteSheet:getWidth(), self.spriteSheet:getHeight()
     local grid = Anim8.newGrid(64, 64, imgWidth, imgHeight)
@@ -51,8 +52,6 @@ function Player:update(dt)
     else
         self.animation:gotoFrame(3)
     end
-
-    camera:lookAt(self.x, self.y)
 end
 
 function Player:draw()

@@ -1,13 +1,12 @@
 PictureScene = Class{__includes = {IObserver, Scene, IOnSceneBegin, IOnSceneEnd}}
 
-function PictureScene:init(imagePath, opts)
+function PictureScene:init(opts)
     Scene.init(self)
     IObserver.init(self)
     IOnSceneBegin.init(self)
     IOnSceneEnd.init(self)
 
     self.opts = opts or {}
-    self.image = love.graphics.newImage(imagePath)
     self.rotation = 0
     self.angleSpeed = 1
 
@@ -84,7 +83,9 @@ end
 function PictureScene:OnEnable()
     soundManager:PlayMusic(self.opts:clone(), 0.1)
 
-    --soundManager.musicChannel:PlayAt({x = 300, y = 300}, self.opts:clone(), true, true, 1)
+    --soundManager.musicChannel:PlayAt({x = 300, y = 300}, self.opts:clone(), true, true, 1
+    cameraManager:AddCamera(self.player, true)
+
     self:FillUI()
     Scene.OnEnable(self)--base
 end
@@ -115,7 +116,7 @@ function PictureScene:update(dt)
     -- end
 
     Scene.update(self, dt)--base
-    qqq = currentCanvas.blockMouseClick and "yes" or "no"
+    --qqq = currentCanvas.blockMouseClick and "yes" or "no"
 end
 
 function PictureScene:draw()

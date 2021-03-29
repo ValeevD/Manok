@@ -8,7 +8,7 @@ Input = require("lib/input")
 Gspot = require("lib/gspot/Gspot")
 Anim8 = require("lib/anim8")
 
-Camera = require("lib/hump/camera")
+HumpCamera = require("lib/hump/camera")
 
 HandleID  = 0
 
@@ -35,6 +35,10 @@ require("Foundation/Managers/InputManager/InputSource/DummyInputSource")
 
 require("Foundation/Managers/InputManager/InputManager")
 
+--CAMERA MANAGER
+require("Foundation/Managers/CameraManager/Camera")
+require("Foundation/Managers/CameraManager/CameraManager")
+
 require("Foundation/Managers/Interfaces/ITweener")
 require("Foundation/Managers/Interfaces/IOnSceneEnd")
 require("Foundation/Managers/Interfaces/IOnSceneBegin")
@@ -55,6 +59,7 @@ require("Game/Scene/PictureScene")
 require("Game/Player/PlayerMovementInput")
 require("Game/Player/PlayerShootInput")
 require("Game/Player/PlayerLookInput")
+require("Game/Player/PlayerLookCameraInput")
 require("Game/Player/Player")
 
 clickSource = love.audio.newSource("resources/click.mp3", "static")

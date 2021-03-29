@@ -89,6 +89,8 @@ end
 function SceneManager:update(dt)
     self:ProcessStageChanging()
 
+
+    cameraManager:update(dt)
     self.currentScene:update(dt)
 end
 

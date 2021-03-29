@@ -10,7 +10,8 @@ function PlayerLookInput:init(player, sceneState)
         local vect = input:Action("Look"):Vector2Value()
         local wid, hei = love.graphics.getWidth()/2, love.graphics.getHeight()/2
 
-        local ax, ay = vect.x - love.graphics.getWidth()/2 - 32, vect.y - love.graphics.getHeight()/2 - 32
+        local currentCamera = cameraManager.currentCamera
+        local ax, ay = vect.x - love.graphics.getWidth()/2 + currentCamera.x, vect.y - love.graphics.getHeight()/2 + currentCamera.y
 
         if vect ~= Vector(0,0) then
             self.player.look.x = math.abs(ax) < 10 and 0 or ax / math.abs(ax)

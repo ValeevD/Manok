@@ -4,12 +4,13 @@ function love.load()
     require("Foundation/GameInitializer")
     gdir = Vector(0,0)
 
+    cameraManager = CameraManager()
     sceneManager = SceneManager()
     soundManager = SoundManager()
 
     inputManager = InputManager()
-    scene1 = PictureScene("resources/fire.png", backGroundSource1)
-    scene2 = PictureScene("resources/water.png", backGroundSource2)
+    scene1 = PictureScene(backGroundSource1)
+    scene2 = PictureScene(backGroundSource2)
 
     scene1:SetNextScene(scene2)
     scene2:SetNextScene(scene1)
@@ -18,12 +19,13 @@ function love.load()
 
     input = Input()
     input:bind("mouse1", "mouse1")
+    input:bind("space", "space")
     input:bind("w", "up")
     input:bind("s", "down")
     input:bind("a", "left")
     input:bind("d", "right")
 
-    camera = Camera(0, 0)
+    --camera = Camera()
 
     newMap = cartographer.load("resources/Spritesheet/tilemap.lua")
 end
@@ -40,7 +42,8 @@ function love.draw()
 
     love.graphics.setColor(0,0,0)
     --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
-    -- love.graphics.print(qqq)
+    love.graphics.print(qqq, 0, 10)
+    --love.graphics.print(sceneManager.currentScene.player.x, 0, 10)
     love.graphics.print(#sceneManager.currentScene.gameObjects)
 
     -- local curSceneStateManager = sceneManager.currentScene.stateManager
