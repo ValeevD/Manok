@@ -1,6 +1,6 @@
 function love.load()
     ind = 0
-    qqq = 0
+    px, py = 0, 0
     require("Foundation/GameInitializer")
     gdir = Vector(0,0)
 
@@ -42,9 +42,10 @@ function love.draw()
 
     love.graphics.setColor(0,0,0)
     --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
-    love.graphics.print(qqq, 0, 10)
+    love.graphics.print(px)
+    love.graphics.print(py, 0, 10)
     --love.graphics.print(sceneManager.currentScene.player.x, 0, 10)
-    love.graphics.print(#sceneManager.currentScene.gameObjects)
+    --love.graphics.print(#sceneManager.currentScene.gameObjects)
 
     -- local curSceneStateManager = sceneManager.currentScene.stateManager
     -- local _offset = 0

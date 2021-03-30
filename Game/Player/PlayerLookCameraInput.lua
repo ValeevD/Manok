@@ -13,7 +13,7 @@ function PlayerLookCameraInput:init(player, sceneState)
             local currentGameObject = cameraManager.currentCamera.gameObject
 
             if self.player == currentGameObject then
-                cameraManager.currentCamera:SetGameobject({x = self.player.x - 50, y = self.player.y - 50})
+                cameraManager.currentCamera:SetGameobject({x = self.player.x, y = self.player.y})
             else
                 cameraManager.currentCamera:SetGameobject(self.player, true)
             end

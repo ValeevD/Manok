@@ -1,13 +1,6 @@
 Camera = Class()
 
 function Camera:init(gameObject, follow)
-    -- self.gameObject = gameObject
-    -- self.x, self.y = 0, 0
-
-    -- if self.gameObject then
-    --     self.x, self.y = self.gameObject.x, self.gameObject.y
-    -- end
-
     self:SetGameobject(gameObject, follow)
     self.libCamera = HumpCamera()
 end
@@ -34,5 +27,6 @@ function Camera:SetGameobject(newGameObject, follow)
     if self.gameObject then
         self.x, self.y = self.gameObject.x, self.gameObject.y
         self.follow = follow
+        self.libCamera:lookAt(self.x, self.y)
     end
 end
