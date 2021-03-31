@@ -8,6 +8,8 @@ function love.load()
     sceneManager = SceneManager()
     soundManager = SoundManager()
 
+    notificationManager = NotificationManager()
+
     inputManager = InputManager()
     scene1 = PictureScene(backGroundSource1)
     scene2 = PictureScene(backGroundSource2)
@@ -18,14 +20,13 @@ function love.load()
     sceneManager:LoadScene(scene1)
 
     input = Input()
+
     input:bind("mouse1", "mouse1")
     input:bind("space", "space")
     input:bind("w", "up")
     input:bind("s", "down")
     input:bind("a", "left")
     input:bind("d", "right")
-
-    --camera = Camera()
 
     newMap = cartographer.load("resources/Spritesheet/tilemap.lua")
 end
@@ -37,30 +38,13 @@ function love.update(dt)
 end
 
 function love.draw()
-
     sceneManager:draw()
 
     love.graphics.setColor(0,0,0)
-    --love.graphics.print("x: "..gdir.x..", y: "..gdir.y)
     love.graphics.print(px)
     love.graphics.print(py, 0, 10)
-    --love.graphics.print(sceneManager.currentScene.player.x, 0, 10)
-    --love.graphics.print(#sceneManager.currentScene.gameObjects)
-
-    -- local curSceneStateManager = sceneManager.currentScene.stateManager
-    -- local _offset = 0
-    -- for i = #curSceneStateManager.states, 1, -1 do
-    --     love.graphics.print(curSceneStateManager.states[i].name, 0, _offset)
-    --     _offset = _offset + 10
-    -- end
-
-    -- local currentScene = curSceneStateManager.currentState
-
-    -- love.graphics.print("Current state: " ..(currentScene and currentScene.name or "NIL"), 0, _offset)
 
     love.graphics.setColor(1,1,1)
-
-
 end
 
 function love.mousepressed(...)

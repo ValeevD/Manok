@@ -40,6 +40,13 @@ function PictureScene:FillUI()
             currentCanvas = newCanvas2
         end
 
+        local newButtonExp = newCanvas:button("Add EXP", {love.graphics.getWidth() - 128 - 10, 50, 128, Gspot.style.unit})
+        newButtonExp.click = function(this)
+            soundManager.sfxChannel:Play(clickSource:clone())
+
+            notificationManager:ShowMessage(newCanvas)
+        end
+
         local scrll = newCanvas:scroll(nil, {10, 10, h = 100}, nil, {0, 100, (1 - soundManager.musicChannel.volume) * 100, 1, 'vertical'})
         scrll:setshape('circle')
         scrll.update = function(this, dt)

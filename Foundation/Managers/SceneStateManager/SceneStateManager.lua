@@ -115,120 +115,21 @@ function SceneStateManager:updateFunc(funcName, ...)
 end
 
 function SceneStateManager:draw()
-    -- self:UpdateCachedGameStates()
-
-    -- local doUpdate = true
-    -- for i = #self.statesCache, 1, -1 do
-    --     local state = self.statesCache[i]
-
-    --     if doUpdate then
-
-    --         for k,v in pairs(state.onUpdate) do
-    --             if k.draw then k:draw() end
-    --         end
-    --     else
-    --         for k,v in pairs(state.onUpdateDuringPause) do
-    --             if k.draw then k:draw() end
-    --         end
-    --     end
-
-    --     doUpdate = doUpdate and state.updateParentState
-    -- end
-
     self:updateFunc("draw")
 end
 
 function SceneStateManager:mousepressed(...)
-    -- self:UpdateCachedGameStates()
-
-    -- local doUpdate = true
-    -- for i = #self.statesCache, 1, -1 do
-    --     local state = self.statesCache[i]
-
-    --     if doUpdate then
-
-    --         for k,v in pairs(state.onUpdate) do
-    --             if k.mousepress then k:mousepress(...) end
-    --         end
-    --     else
-    --         for k,v in pairs(state.onUpdateDuringPause) do
-    --             if k.mousepress then k:mousepress(...) end
-    --         end
-    --     end
-
-    --     doUpdate = doUpdate and state.updateParentState
-    -- end
-
     self:updateFunc("mousepress", ...)
 end
 
 function SceneStateManager:mousereleased(...)
-    -- self:UpdateCachedGameStates()
-
-    -- local doUpdate = true
-    -- for i = #self.statesCache, 1, -1 do
-    --     local state = self.statesCache[i]
-
-    --     if doUpdate then
-
-    --         for k,v in pairs(state.onUpdate) do
-    --             if k.mouserelease then k:mouserelease(...) end
-    --         end
-    --     else
-    --         for k,v in pairs(state.onUpdateDuringPause) do
-    --             if k.mouserelease then k:mouserelease(...) end
-    --         end
-    --     end
-
-    --     doUpdate = doUpdate and state.updateParentState
-    -- end
     self:updateFunc("mouserelease", ...)
 end
 
 function SceneStateManager:keypressed(...)
-    -- self:UpdateCachedGameStates()
-
-    -- local doUpdate = true
-    -- for i = #self.statesCache, 1, -1 do
-    --     local state = self.statesCache[i]
-
-    --     if doUpdate then
-
-    --         for k,v in pairs(state.onUpdate) do
-    --             if k.keypress then k:keypress(...) end
-    --         end
-    --     else
-    --         for k,v in pairs(state.onUpdateDuringPause) do
-    --             if k.keypress then k:keypress(...) end
-    --         end
-    --     end
-
-    --     doUpdate = doUpdate and state.updateParentState
-    -- end
-
     self:updateFunc("keypress", ...)
 end
 
 function SceneStateManager:textinput(...)
-    -- self:UpdateCachedGameStates()
-
-    -- local doUpdate = true
-    -- for i = #self.statesCache, 1, -1 do
-    --     local state = self.statesCache[i]
-
-    --     if doUpdate then
-
-    --         for k,v in pairs(state.onUpdate) do
-    --             if k.textinput then k:textinput(...) end
-    --         end
-    --     else
-    --         for k,v in pairs(state.onUpdateDuringPause) do
-    --             if k.textinput then k:textinput(...) end
-    --         end
-    --     end
-
-    --     doUpdate = doUpdate and state.updateParentState
-    -- end
-
     self:updateFunc("textinput", ...)
 end

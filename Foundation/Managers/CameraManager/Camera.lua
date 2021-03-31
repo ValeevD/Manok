@@ -26,7 +26,7 @@ function Camera:SetGameobject(newGameObject, follow)
 
     if self.gameObject then
         self.x, self.y = self.gameObject.x, self.gameObject.y
-        self.follow = follow
+        self.follow = follow or false
         self.libCamera:lookAt(self.x, self.y)
     end
 end

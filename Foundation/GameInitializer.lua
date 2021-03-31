@@ -15,8 +15,17 @@ HandleID  = 0
 cartographer = require("lib/cartographer")
 require("Foundation/Observer/IObserver")
 
+require("Foundation/Managers/Interfaces/ITweener")
+require("Foundation/Managers/Interfaces/IOnSceneEnd")
+require("Foundation/Managers/Interfaces/IOnSceneBegin")
+
 --OBJECTS
 require("Foundation/Managers/SceneManager/SceneManager")
+
+--NOTIFICATIONS
+require("Foundation/Managers/NotificationManager/Notification")
+require("Foundation/Managers/NotificationManager/NotificationManager")
+
 
 --SOUND MANAGER
 require("Foundation/Managers/SoundManager/Source/SoundSource")
@@ -39,9 +48,6 @@ require("Foundation/Managers/InputManager/InputManager")
 require("Foundation/Managers/CameraManager/Camera")
 require("Foundation/Managers/CameraManager/CameraManager")
 
-require("Foundation/Managers/Interfaces/ITweener")
-require("Foundation/Managers/Interfaces/IOnSceneEnd")
-require("Foundation/Managers/Interfaces/IOnSceneBegin")
 require("Foundation/Managers/UIManager/UIManager")
 require("Foundation/Managers/UIManager/GUI")
 require("Foundation/Scene/Scene")
