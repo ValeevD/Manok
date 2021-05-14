@@ -1,3 +1,5 @@
+--some comment
+
 function love.load()
     ind = 0
     px, py = 0, 0
